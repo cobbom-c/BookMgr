@@ -2,15 +2,16 @@ package top.ourck.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import top.ourck.beans.Major;
+import top.ourck.beans.Lesson;
 
-public interface LessonDAO extends SimpleDAO<Major> {
+@Mapper
+public interface LessonDAO extends SimpleDAO<Lesson> {
 
-	// TODO 改前六行 & 泛型关键字！
 	String TABLE_NAME = " " + "lesson" + " ";
 	String UPDATE_FIELDS = " " + "name, detail_id" + " ";
 	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
@@ -25,14 +26,14 @@ public interface LessonDAO extends SimpleDAO<Major> {
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-	int add(Major obj);
+	int add(Lesson obj);
 	
 	@Delete(DELETE_SQL)
 	void delete(int id);
 	
 	@Update(UPDATE_SQL)
-	void update(Major obj);
+	void update(Lesson obj);
 	
 	@Select(SELECT_SQL)
-	Major select(int id);
+	Lesson select(int id);
 }

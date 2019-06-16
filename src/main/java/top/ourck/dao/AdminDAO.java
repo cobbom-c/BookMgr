@@ -26,7 +26,7 @@ public interface AdminDAO extends SimpleDAO<Admin>{
 	String SELECT_BY_NAME_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE username = #{userName}";
 
 	@Insert(ADD_SQL)
-	@Options(useGeneratedKeys = true)
+	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 	int add(Admin obj);
 	
 	@Delete(DELETE_SQL)

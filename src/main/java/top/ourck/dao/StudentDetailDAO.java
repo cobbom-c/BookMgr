@@ -2,15 +2,19 @@ package top.ourck.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import top.ourck.beans.StudentDetail;
 
+@Mapper
 public interface StudentDetailDAO extends SimpleDAO<StudentDetail> {
 
-	// TODO 改前六行 & 泛型关键字！
 	String TABLE_NAME = " " + "student_detail" + " ";
 	String UPDATE_FIELDS = " " + "name, hometown, cid" + " ";
 	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
@@ -29,11 +33,19 @@ public interface StudentDetailDAO extends SimpleDAO<StudentDetail> {
 	int add(StudentDetail obj);
 	
 	@Delete(DELETE_SQL)
+	@Results({
+		@Result(column = "cid", property = "clazz",
+				one = @One(select = "top.ourck.dao.ClassDAO.select"))		
+	})
 	void delete(int id);
 	
 	@Update(UPDATE_SQL)
 	void update(StudentDetail obj);
 	
 	@Select(SELECT_SQL)
+	@Results({
+		@Result(column = "cid", property = "clazz",
+				one = @One(select = "top.ourck.dao.ClassDAO.select"))		
+	})
 	StudentDetail select(int id);
 }

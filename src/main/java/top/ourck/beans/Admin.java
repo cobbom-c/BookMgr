@@ -4,7 +4,7 @@ public class Admin {
 
 	private int id;
 	private String userName;
-	private String pssword;
+	private String password;
 	
 	public Admin() {
 		// TODO Auto-generated constructor stub
@@ -14,7 +14,7 @@ public class Admin {
 		super();
 		this.id = id;
 		this.userName = userName;
-		this.pssword = pssword;
+		this.password = pssword;
 	}
 
 	public int getId() {
@@ -25,12 +25,12 @@ public class Admin {
 		this.id = id;
 	}
 
-	public String getPssword() {
-		return pssword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPssword(String pssword) {
-		this.pssword = pssword;
+	public void setPassword(String pssword) {
+		this.password = pssword;
 	}
 
 	public String getUserName() {

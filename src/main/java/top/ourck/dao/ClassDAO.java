@@ -3,7 +3,10 @@ package top.ourck.dao;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -19,8 +22,9 @@ public interface ClassDAO extends SimpleDAO<Class> {
 	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{name}, #{grade}, #{major.id} )";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
 			+ "name = #{name}, "
-			+ "grade = #{grade} "
-			+ "WHERE id = #{major.id}";
+			+ "grade = #{grade}, "
+			+ "mid = #{major.id} "
+			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	
@@ -35,5 +39,9 @@ public interface ClassDAO extends SimpleDAO<Class> {
 	void update(Class obj);
 	
 	@Select(SELECT_SQL)
+	@Results({
+		@Result(column = "mid", property = "major",
+				one = @One(select = "top.ourck.dao.MajorDAO.select"))
+	})
 	Class select(int id);
 }

@@ -2,6 +2,8 @@ package top.ourck.beans;
 
 public class Instruct {
 
+	private int id;
+
 	private Teacher teacher;
 	private Lesson lesson;
 	
@@ -31,5 +33,12 @@ public class Instruct {
 		this.lesson = lesson;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 }

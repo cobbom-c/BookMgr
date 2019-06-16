@@ -3,7 +3,10 @@ package top.ourck.dao;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -27,19 +30,27 @@ public interface StudentDAO extends SimpleDAO<Student>{
 	String SELECT_BY_NAME_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE username = #{userName}";
 
 	@Insert(ADD_SQL)
-	@Options(useGeneratedKeys = true)
+	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 	int add(Student obj);
 	
 	@Delete(DELETE_SQL)
 	void delete(int id);
 	
 	@Select(SELECT_SQL)
+	@Results({
+		@Result(column = "detail_id", property = "studentDetail",
+				one = @One(select = "top.ourck.dao.StudentDetailDAO.select"))		
+	})
 	Student select(int id);
 	
 	@Update(UPDATE_SQL)
 	void update(Student obj);
 
 	@Select(SELECT_BY_NAME_SQL)
+	@Results({
+		@Result(column = "detail_id", property = "studentDetail",
+				one = @One(select = "top.ourck.dao.StudentDetailDAO.select"))		
+	})
 	Student selectByUserName(String userName);
 	
 }

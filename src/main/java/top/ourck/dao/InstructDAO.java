@@ -2,11 +2,17 @@ package top.ourck.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import top.ourck.beans.Instruct;
 
+@Mapper
 public interface InstructDAO extends SimpleDAO<Instruct> {
 
 	// TODO 改前六行 & 泛型关键字！
@@ -22,6 +28,7 @@ public interface InstructDAO extends SimpleDAO<Instruct> {
 	String SELECT_SQL = "SELECT" + FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	
 	@Insert(ADD_SQL)
+	@Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
 	int add(Instruct obj);
 	
 	@Delete(DELETE_SQL)
@@ -31,5 +38,11 @@ public interface InstructDAO extends SimpleDAO<Instruct> {
 	void update(Instruct obj);
 	
 	@Select(SELECT_SQL)
+	@Results({
+		@Result(column = "tid", property = "teacher",
+				one = @One(select = "top.ourck.dao.TeacherDAO.select")),
+		@Result(column = "lid", property = "lesson",
+				one = @One(select = "top.ourck.dao.LessonDAO.select"))
+	})
 	Instruct select(int id);
 }

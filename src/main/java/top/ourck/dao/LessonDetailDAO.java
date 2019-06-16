@@ -2,15 +2,16 @@ package top.ourck.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import top.ourck.beans.LessonDetail;
 
+@Mapper
 public interface LessonDetailDAO extends SimpleDAO<LessonDetail> {
 
-	// TODO 改前六行 & 泛型关键字！
 	String TABLE_NAME = " " + "lesson_detail" + " ";
 	String UPDATE_FIELDS = " "
 			+ "lesson_code, "

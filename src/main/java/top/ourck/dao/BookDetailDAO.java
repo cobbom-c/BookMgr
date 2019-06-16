@@ -2,12 +2,14 @@ package top.ourck.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import top.ourck.beans.BookDetail;
 
+@Mapper
 public interface BookDetailDAO extends SimpleDAO<BookDetail> {
 
 	// TODO 改前六行 & 泛型关键字！

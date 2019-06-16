@@ -2,12 +2,17 @@ package top.ourck.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import top.ourck.beans.BookOrder;
 
+@Mapper
 public interface BookOrderDAO extends SimpleDAO<BookOrder> {
 
 	// TODO 改前六行 & 泛型关键字！
@@ -34,5 +39,9 @@ public interface BookOrderDAO extends SimpleDAO<BookOrder> {
 	void update(BookOrder obj);
 	
 	@Select(SELECT_SQL)
+	@Results({
+		@Result(column = "bid", property = "book",
+				one = @One(select = "top.ourck.dao.BookDAO.select"))
+	})
 	BookOrder select(int id);
 }

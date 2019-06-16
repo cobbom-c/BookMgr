@@ -18,7 +18,7 @@ public interface MajorDAO extends SimpleDAO<Major> {
 	
 	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{name} )";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
-			+ "name = #{name}, "
+			+ "name = #{name} "
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
