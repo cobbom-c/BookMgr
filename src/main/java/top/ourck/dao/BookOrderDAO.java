@@ -13,7 +13,7 @@ public interface BookOrderDAO extends SimpleDAO<BookOrder> {
 	// TODO 改前六行 & 泛型关键字！
 	String TABLE_NAME = " " + "book_order" + " ";
 	String UPDATE_FIELDS = " " + "bid, num" + " ";
-	String INSERT_FIELDS = " id," + UPDATE_FIELDS;
+	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
 	
 	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{book.id}, #{num} )";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
@@ -21,7 +21,7 @@ public interface BookOrderDAO extends SimpleDAO<BookOrder> {
 			+ "num = #{num} "
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
-	String SELECT_SQL = "SELECT FROM" + TABLE_NAME + "WHERE id = #{id}";
+	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

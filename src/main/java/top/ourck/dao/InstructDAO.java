@@ -5,31 +5,31 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import top.ourck.beans.Attend;
+import top.ourck.beans.Instruct;
 
-public interface AttendDAO extends SimpleDAO<Attend> {
+public interface InstructDAO extends SimpleDAO<Instruct> {
 
-	String TABLE_NAME = " " + "attend" + " ";
-	String FIELDS = " " + "cid, lid" + " ";
+	// TODO 改前六行 & 泛型关键字！
+	String TABLE_NAME = " " + "instruct" + " ";
+	String FIELDS = " " + "tid, lid" + " ";
 	
-	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + FIELDS + ")" + " VALUES( #{class.id}, #{Lesson.id} )";
+	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + FIELDS + ")" + " VALUES( #{teacher.id}, #{lesson.id} )";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
-			+ "cld = #{class.id}, "
-			+ "lid = #{Lesson.id} "
+			+ "tid = #{teacher.id}, "
+			+ "lid = #{lesson.id} "
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	
 	@Insert(ADD_SQL)
-//	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-	int add(Attend obj);
+	int add(Instruct obj);
 	
 	@Delete(DELETE_SQL)
 	void delete(int id);
 	
 	@Update(UPDATE_SQL)
-	void update(Attend obj);
+	void update(Instruct obj);
 	
 	@Select(SELECT_SQL)
-	Attend select(int id);
+	Instruct select(int id);
 }

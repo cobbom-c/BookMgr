@@ -14,7 +14,7 @@ public interface ClassDAO extends SimpleDAO<Class> {
 
 	String TABLE_NAME = " class ";
 	String UPDATE_FIELDS = " name, grade, mid ";
-	String INSERT_FIELDS = " id," + UPDATE_FIELDS;
+	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
 	
 	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{name}, #{grade}, #{major.id} )";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
@@ -22,7 +22,7 @@ public interface ClassDAO extends SimpleDAO<Class> {
 			+ "grade = #{grade} "
 			+ "WHERE id = #{major.id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
-	String SELECT_SQL = "SELECT FROM" + TABLE_NAME + "WHERE id = #{id}";
+	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

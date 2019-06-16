@@ -7,38 +7,40 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import top.ourck.beans.Admin;
+import top.ourck.beans.Teacher;
+
 
 @Mapper
-public interface AdminDAO extends SimpleDAO<Admin>{
+public interface TeacherDAO extends SimpleDAO<Teacher>{
 
-	String TABLE_NAME = " admin ";
-	String UPDATE_FIELDS = " username, password ";
+	String TABLE_NAME = " teacher ";
+	String UPDATE_FIELDS = " username, password, detail_id ";
 	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
 
-	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{userName}, #{password} )";
+	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{userName}, #{password}, #{teacherDetail.id} )";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
 			+ "username = #{userName}, "
-			+ "password = #{password} "
+			+ "password = #{password}, "
+			+ "detail_id = #{teacherDetail.id} "
 			+ "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_BY_NAME_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE username = #{userName}";
 
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true)
-	int add(Admin obj);
+	int add(Teacher obj);
 	
 	@Delete(DELETE_SQL)
 	void delete(int id);
 	
 	@Select(SELECT_SQL)
-	Admin select(int id);
+	Teacher select(int id);
 	
 	@Update(UPDATE_SQL)
-	void update(Admin obj);
+	void update(Teacher obj);
 
 	@Select(SELECT_BY_NAME_SQL)
-	Admin selectByUserName(String userName);
+	Teacher selectByUserName(String userName);
 	
 }
