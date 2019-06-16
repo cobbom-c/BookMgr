@@ -3,6 +3,7 @@ package top.ourck.dao;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -25,6 +26,7 @@ public interface AdminDAO extends SimpleDAO<Admin>{
 	String SELECT_BY_NAME_SQL = "SELECT * FROM" + TABLE_NAME + "WHERE username = #{username}";
 
 	@Insert(ADD_SQL)
+	@Options(useGeneratedKeys = true)
 	int add(Admin obj);
 	
 	@Delete(DELETE_SQL)
