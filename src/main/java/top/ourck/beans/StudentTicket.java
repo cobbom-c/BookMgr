@@ -1,10 +1,14 @@
 package top.ourck.beans;
 
+import java.util.Date;
+
 public class StudentTicket {
 
 	private int id;
 	private String ticket;
 	private Student student;
+	private Date expired;
+	private int status;
 	
 	public StudentTicket() {
 		// TODO Auto-generated constructor stub
@@ -15,6 +19,24 @@ public class StudentTicket {
 		this.id = id;
 		this.ticket = ticket;
 		this.student = student;
+	}
+
+	
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Date getExpired() {
+		return expired;
+	}
+
+	public void setExpired(Date expired) {
+		this.expired = expired;
 	}
 
 	public int getId() {

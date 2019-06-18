@@ -10,26 +10,26 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import top.ourck.beans.TeacherTicket;
+import top.ourck.beans.StudentTicket;
 
 @Mapper
-public interface TeacherTicketDAO extends SimpleDAO<TeacherTicket> {
+public interface StudentTicketDAO extends SimpleDAO<StudentTicket> {
 
-	// teacher_ticket(id, ticket, uid, expired, status)
+	// student_ticket(id, ticket, uid, expired, status)
 	
-	String TABLE_NAME = " teacher_ticket ";
+	String TABLE_NAME = " student_ticket ";
 	String UPDATE_FIELDS = " ticket, uid, expired, status ";
 	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
 	
 	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( "
 			+ "#{ticket}, "
-			+ "#{teacher.id}, "
+			+ "#{student.id}, "
 			+ "#{expired}, "
 			+ "#{status}"
 			+ ")";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
 			+ "ticket = #{ticket}, "
-			+ "uid = #{teacher.id}, "
+			+ "uid = #{student.id}, "
 			+ "expired = #{expired}, "
 			+ "status = #{status} "
 			+ "WHERE id = #{id}";
@@ -39,26 +39,26 @@ public interface TeacherTicketDAO extends SimpleDAO<TeacherTicket> {
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-	int add(TeacherTicket obj);
+	int add(StudentTicket obj);
 	
 	@Delete(DELETE_SQL)
 	void delete(int id);
 	
 	@Update(UPDATE_SQL)
-	void update(TeacherTicket obj);
+	void update(StudentTicket obj);
 	
 	@Select(SELECT_SQL)
 	@Results({
-		@Result(column = "uid", property = "teacher",
-				one = @One(select = "top.ourck.dao.TeacherDAO.select"))
+		@Result(column = "uid", property = "student",
+				one = @One(select = "top.ourck.dao.studentDAO.select"))
 	})
-	TeacherTicket select(int id);
+	StudentTicket select(int id);
 	
 	@Select(SELECT_BY_TICKET_SQL)
 	@Results({
-		@Result(column = "uid", property = "teacher",
-				one = @One(select = "top.ourck.dao.TeacherDAO.select"))
+		@Result(column = "uid", property = "student",
+				one = @One(select = "top.ourck.dao.StudentDAO.select"))
 	})
-	TeacherTicket selectByTicket(String ticket);
+	StudentTicket selectByTicket(String ticket);
 	
 }

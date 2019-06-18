@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<title>大学教材管理系统</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div th:fragment="headerBar">
+		<nav class="navbar navbar-default container-fluid" role="navigation">
+			<div class="navbar-header">
+				<img class="navbar-brand" src="/img/logo.png">
+			</div>
+	
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="bookmgr">教材管理</a></li>
+					<li><a th:href="index" th:text="|Welcome, ${verifiedUser.userName}!|"></a>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

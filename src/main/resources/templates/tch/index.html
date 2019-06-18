@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header::head"></head>
+
+<body>
+	<div th:include="header::headerBar"></div>
+	
+	<h1 style="text-align: center; padding: 20px" th:text="|Welcome, ${verifiedUser.userName}!|"></h1>
+	
+	<div th:include="footer::footerBar"></div>
+</body>
+</html>

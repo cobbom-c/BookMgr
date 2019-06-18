@@ -10,26 +10,26 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import top.ourck.beans.TeacherTicket;
+import top.ourck.beans.AdminTicket;
 
 @Mapper
-public interface TeacherTicketDAO extends SimpleDAO<TeacherTicket> {
+public interface AdminTicketDAO extends SimpleDAO<AdminTicket> {
 
-	// teacher_ticket(id, ticket, uid, expired, status)
+	// admin_ticket(id, ticket, uid, expired, status)
 	
-	String TABLE_NAME = " teacher_ticket ";
+	String TABLE_NAME = " admin_ticket ";
 	String UPDATE_FIELDS = " ticket, uid, expired, status ";
 	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
 	
 	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( "
 			+ "#{ticket}, "
-			+ "#{teacher.id}, "
+			+ "#{admin.id}, "
 			+ "#{expired}, "
 			+ "#{status}"
 			+ ")";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
 			+ "ticket = #{ticket}, "
-			+ "uid = #{teacher.id}, "
+			+ "uid = #{admin.id}, "
 			+ "expired = #{expired}, "
 			+ "status = #{status} "
 			+ "WHERE id = #{id}";
@@ -39,26 +39,26 @@ public interface TeacherTicketDAO extends SimpleDAO<TeacherTicket> {
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-	int add(TeacherTicket obj);
+	int add(AdminTicket obj);
 	
 	@Delete(DELETE_SQL)
 	void delete(int id);
 	
 	@Update(UPDATE_SQL)
-	void update(TeacherTicket obj);
+	void update(AdminTicket obj);
 	
 	@Select(SELECT_SQL)
 	@Results({
-		@Result(column = "uid", property = "teacher",
-				one = @One(select = "top.ourck.dao.TeacherDAO.select"))
+		@Result(column = "uid", property = "admin",
+				one = @One(select = "top.ourck.dao.AdminDAO.select"))
 	})
-	TeacherTicket select(int id);
+	AdminTicket select(int id);
 	
 	@Select(SELECT_BY_TICKET_SQL)
 	@Results({
-		@Result(column = "uid", property = "teacher",
-				one = @One(select = "top.ourck.dao.TeacherDAO.select"))
+		@Result(column = "uid", property = "admin",
+				one = @One(select = "top.ourck.dao.AdminDAO.select"))
 	})
-	TeacherTicket selectByTicket(String ticket);
+	AdminTicket selectByTicket(String ticket);
 	
 }
