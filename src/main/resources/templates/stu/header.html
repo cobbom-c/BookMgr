@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<title>学生教材预定系统 - 学生教材预定</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div th:fragment="headerBar">
+		<nav class="navbar navbar-inverse container-fluid" role="navigation">
+			<div class="navbar-header">
+				<img class="navbar-brand" src="/img/logo.png">
+			</div>
+	
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="/stu/index" th:text="|Welcome, ${verifiedUser.userName}!|"></a>
+					<li><a href="/stu/bookorder">教材预定表</a></li>
+					<li><a href="/stu/logout">退出登陆</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

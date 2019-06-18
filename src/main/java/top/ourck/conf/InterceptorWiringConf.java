@@ -5,22 +5,32 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import top.ourck.interceptor.LoginCheckInterceptor;
-import top.ourck.interceptor.UserAuthInterceptor;
+import top.ourck.interceptor.TeacherAuthInterceptor;
+import top.ourck.interceptor.AdminAuthInterceptor;
+import top.ourck.interceptor.RememberedUserInterceptor;
+import top.ourck.interceptor.StudentAuthInterceptor;
 
 @Configuration
 public class InterceptorWiringConf implements WebMvcConfigurer {
 
 	@Autowired
-	private UserAuthInterceptor uaInterceptor;
+	private RememberedUserInterceptor uaInterceptor;
 	
 	@Autowired
-	private LoginCheckInterceptor lcInterceptor;
+	private TeacherAuthInterceptor taInterceptor;
+	
+	@Autowired
+	private StudentAuthInterceptor saInterceptor;
+	
+	@Autowired
+	private AdminAuthInterceptor adminInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(uaInterceptor);
-		registry.addInterceptor(lcInterceptor).addPathPatterns("/tch/*", "/tch/*/");
+		registry.addInterceptor(taInterceptor).addPathPatterns("/tch", "/tch/*", "/tch/*/");
+		registry.addInterceptor(saInterceptor).addPathPatterns("/stu", "/stu/*", "/stu/*/");
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin", "/admin/*", "/admin/*/");
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}
 

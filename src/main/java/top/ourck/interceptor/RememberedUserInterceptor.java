@@ -22,7 +22,7 @@ import top.ourck.service.LoginTicketService;
  * <li>校验ticket；</li>
  * <li>如果通过，向处理该请求的线程的ThreadLocal放入通过验证的用户实体U。</li>
  * </ol>
- * 上述U将被用于{@link LoginCheckInterceptor}中的二次校验。
+ * 上述U将被用于{@link TeacherAuthInterceptor}中的二次校验。
  * <br><br>
  * TODO 每个角色一套机制，这不是一个良好的设计。<br>
  * 用户有三种：学生，老师，和管理员<br>
@@ -33,7 +33,7 @@ import top.ourck.service.LoginTicketService;
  *
  */
 @Component
-public class UserAuthInterceptor extends HandlerInterceptorAdapter {
+public class RememberedUserInterceptor extends HandlerInterceptorAdapter {
 	
 	/**
 	 * <b>为什么要使用ThreadLocal存储待使用的User？</b>

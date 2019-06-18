@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -36,6 +37,7 @@ public interface TeacherTicketDAO extends SimpleDAO<TeacherTicket> {
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_BY_TICKET_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE ticket = #{ticket}";
+	String UPDATE_SET_STATUS_SQL = "UPDATE" + TABLE_NAME + "SET status = #{status} WHERE ticket = #{ticket}";
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
@@ -61,4 +63,7 @@ public interface TeacherTicketDAO extends SimpleDAO<TeacherTicket> {
 	})
 	TeacherTicket selectByTicket(String ticket);
 	
+	@Update(UPDATE_SET_STATUS_SQL)
+	void setStatus(@Param("ticket") String ticket,
+					@Param("status") int status);
 }

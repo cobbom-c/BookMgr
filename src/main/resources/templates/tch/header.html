@@ -2,7 +2,7 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
 	<meta charset="UTF-8">
-	<title>大学教材管理系统</title>
+	<title>教师教材管理系统 - 教师教材录入</title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 
@@ -15,8 +15,9 @@
 	
 			<div>
 				<ul class="nav navbar-nav">
-					<li><a href="bookmgr">教材管理</a></li>
-					<li><a th:href="index" th:text="|Welcome, ${verifiedUser.userName}!|"></a>
+					<li><a href="/tch/index" th:text="|Welcome, ${verifiedUser.userName}!|"></a>
+					<li><a href="/tch/bookmgr">教材管理</a></li>
+					<li><a href="/tch/logout">退出登陆</a></li>
 				</ul>
 			</div>
 		</nav>

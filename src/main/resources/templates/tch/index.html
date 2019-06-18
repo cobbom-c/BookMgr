@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head th:include="header::head"></head>
+<head th:include="tch/header::head"></head>
 
 <body>
-	<div th:include="header::headerBar"></div>
+	<div th:include="tch/header::headerBar"></div>
 	
-	<h1 style="text-align: center; padding: 20px" th:text="|Welcome, ${verifiedUser.userName}!|"></h1>
+	<h1 style="text-align: center; padding: 20px" th:text="|欢迎来到教师系统，用户${verifiedUser.userName}！|"></h1>
 	
-	<div th:include="footer::footerBar"></div>
+	<div th:include="tch/footer::footerBar"></div>
 </body>
 </html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="stu/header::head"></head>
+
+<body>
+	<div th:include="stu/header::headerBar"></div>
+	
+	<h1 style="text-align: center; padding: 20px" th:text="|欢迎来到学生系统，用户${verifiedUser.userName}！|"></h1>
+	
+	<div th:include="stu/footer::footerBar"></div>
+</body>
+</html>

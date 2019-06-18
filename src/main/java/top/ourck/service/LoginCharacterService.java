@@ -18,6 +18,7 @@ public interface LoginCharacterService<T> {
 	 */
 	Map<String, Object> getAuth(String userName, String password);
 	Map<String, Object> register(T obj);
+	void logout(String ticket);
 	T getById(int id);
 	
 }

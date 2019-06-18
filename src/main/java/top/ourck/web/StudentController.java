@@ -6,29 +6,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import top.ourck.service.TeacherService;
+import top.ourck.service.StudentService;
 
 
 @Controller
-@RequestMapping("/tch")
-public class TeacherController {
+@RequestMapping("/stu")
+public class StudentController {
 
 	@Autowired
-	private TeacherService teacherService;
+	private StudentService studentService;
 	
-	@RequestMapping(value = {"", "/index", "/"})
-	public String index(Model model) {
-		return "tch/index";
+	@RequestMapping(value = {"/", "", "/index"})
+	public String index() {
+		return "stu/index";
 	}
 	
-	@RequestMapping("/bookmgr")
+	@RequestMapping("/bookorder")
 	public String bookMgr(Model model) {
-		return "tch/bookMgr";
+		return "stu/bookOrder";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(@CookieValue("ticket") String ticket) {
-		teacherService.logout(ticket);
+		studentService.logout(ticket);
 		return "redirect:/login/auth";
 	}
 }

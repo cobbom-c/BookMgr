@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import top.ourck.beans.UserType;
 import top.ourck.beans.util.LoginTicket;
+import top.ourck.beans.util.User;
 import top.ourck.service.UserService;
 
 
@@ -29,7 +31,6 @@ public class LoginController {
 	@GetMapping("/auth")
 	public String login(@RequestParam(value = "target", required = false) String target,
 						Model model) {
-		if(target == null) target = "/";
 		model.addAttribute("target", target);
 		return "auth/login.html";
 	}
@@ -39,13 +40,21 @@ public class LoginController {
 						@RequestParam(value = "target", required = false) String target, 
 						@RequestParam("username") String userName, 
 						@RequestParam("password") String password) {
-		if(target == null) target = "/";
 		Map<String, Object> result = userService.getAuth(userName, password);
 		if(result.get("success").equals("true")) {
 			// TODO Auth check?
 			Cookie ck = new Cookie("ticket", ((LoginTicket)result.get("ticket")).getTicket());
 			ck.setPath("/"); // HINT !!!不设置的话就会按照原来/login的Path设置Cookie，这样Cookie在目标页面没法用！
 			response.addCookie(ck);
+			
+			UserType type = ((User)result.get("user")).getType();
+			if(target == null || target.equals("")) {
+				switch(type) {
+				case ADMIN: target = "/admin"; break;
+				case TEACHER: target = "/tch"; break;
+				case STUDENT: target = "/stu"; break;
+				}
+			}
 			return "redirect:" + target;
 		}
 		else {

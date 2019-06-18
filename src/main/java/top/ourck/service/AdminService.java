@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import top.ourck.beans.Admin;
 import top.ourck.beans.UserType;
 import top.ourck.dao.AdminDAO;
+import top.ourck.dao.AdminTicketDAO;
 
 
 @Service
 public class AdminService implements LoginCharacterService<Admin> {
 
+	@Autowired
+	private AdminTicketDAO atDao;
+	
 	@Autowired
 	private AdminDAO sDao;
 	
@@ -65,4 +69,8 @@ public class AdminService implements LoginCharacterService<Admin> {
 		return sDao.select(id);
 	}
 
+	@Override
+	public void logout(String ticket) {
+		atDao.setStatus(ticket, 1);
+	}
 }

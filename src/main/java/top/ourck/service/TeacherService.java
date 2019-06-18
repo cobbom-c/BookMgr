@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import top.ourck.beans.Teacher;
 import top.ourck.beans.UserType;
 import top.ourck.dao.TeacherDAO;
+import top.ourck.dao.TeacherTicketDAO;
 
 @Service
 public class TeacherService implements LoginCharacterService<Teacher> {
 
 	@Autowired
 	private TeacherDAO tDao;
+	
+	@Autowired
+	private TeacherTicketDAO ttDao;
 	
 	@Override
 	public Map<String, Object> getAuth(String userName, String password) {
@@ -64,4 +68,9 @@ public class TeacherService implements LoginCharacterService<Teacher> {
 		return tDao.select(id);
 	}
 
+	@Override
+	public void logout(String ticket) {
+		ttDao.setStatus(ticket, 1);
+	}
+	
 }
