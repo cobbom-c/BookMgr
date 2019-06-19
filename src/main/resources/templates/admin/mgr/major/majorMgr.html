@@ -1,0 +1,65 @@
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/admin/header::head"></head>
+
+<body>
+	<div th:include="/admin/header::headerBar"></div>
+
+	<div class="container">
+
+		<div class="panel panel-warning addDiv" style="“width: 550px;">
+			<div class="panel-heading">新增专业</div>
+			<div class="panel-body">
+				<form method="post" id="addForm" action="major/add">
+					<table class="addTable table table-responsive table-striped table-hover">
+						
+						<!-- TABLE HERE! -->
+						
+						<tr>
+							<td>专业名<font style="color: red">*</font></td>
+							<td><input id="name" name="name" type="text" class="form-control"></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">新增</button>
+							</td>
+						</tr>
+						
+					</table>
+				</form>
+			</div>
+		</div>
+
+		<div class="listDataTableDiv">
+			<table
+				class="table table-striped table-bordered table-hover table-condensed">
+				<thead>
+					<tr class="success">
+					
+						<!-- TABLE HERE! -->
+					
+<!-- 						<th>ID</th> -->
+						<th>专业名</th>
+						<th>编辑</th>
+						<th>删除</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="obj : ${objList}">
+						<!-- <td>${item.id}</td> -->
+						<td th:text="${obj.name}"></td>
+						<td><a th:href="'/admin/mgr/major/edit/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-edit"></span>
+						</a></td>
+						<td><a th:href="'/admin/mgr/major/delete/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-trash"></span>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:include="/admin/footer::footerBar"></div>
+</body>
+</html>

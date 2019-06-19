@@ -22,7 +22,7 @@ import top.ourck.dao.TeacherTicketDAO;
 @Service
 public class LoginTicketService {
 
-	private static final int EXPIRE_SEC = 60 * 5; // 5-min man
+	private static final int EXPIRE_SEC = 60 * 30; // 30-min man
 	
 	@Autowired
 	private TeacherTicketDAO ttDao;

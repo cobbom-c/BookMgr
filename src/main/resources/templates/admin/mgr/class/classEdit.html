@@ -1,0 +1,38 @@
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="admin/header::head"></head>
+
+<body>
+	<div th:include="admin/header::headerBar"></div>
+
+	<div class="container">
+
+		<div class="panel panel-warning addDiv" style="“width: 550px;">
+			<div class="panel-heading" th:text="|编辑专业信息 - id = ${obj.id}|"></div>
+			<div class="panel-body">
+				<form method="post" id="addForm" action="../update">
+					<table class="addTable table table-responsive table-striped table-hover">
+					
+						<!-- TABLE HERE! -->
+						<tr>
+							<td>
+								专业名<font style="color: red">*</font>
+								<input type="hidden" id="id" name="id" th:value="${obj.id}">
+							</td>
+							<td><input id="name" name="name" type="text" class="form-control" th:value="${obj.name}"></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">提交修改</button>
+							</td>
+						</tr>
+						
+					</table>
+				</form>
+			</div>
+		</div>	
+	
+	</div>
+
+	<div th:include="admin/footer::footerBar"></div>
+</body>
+</html>

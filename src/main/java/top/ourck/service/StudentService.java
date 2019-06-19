@@ -1,15 +1,17 @@
 package top.ourck.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import top.ourck.beans.Student;
-import top.ourck.beans.StudentTicket;
+import top.ourck.beans.StudentDetail;
 import top.ourck.beans.UserType;
 import top.ourck.dao.StudentDAO;
+import top.ourck.dao.StudentDetailDAO;
 import top.ourck.dao.StudentTicketDAO;
 
 
@@ -21,6 +23,9 @@ public class StudentService implements LoginCharacterService<Student> {
 	
 	@Autowired
 	private StudentDAO sDao;
+	
+	@Autowired
+	private StudentDetailDAO sdDao;
 	
 	@Override
 	public Map<String, Object> getAuth(String userName, String password) {
@@ -63,14 +68,49 @@ public class StudentService implements LoginCharacterService<Student> {
 		
 		return info;
 	}
-
+	
+	@Override
+	public void logout(String ticket) {
+		stDao.setStatus(ticket, 1);
+	}
+	
+	public List<Student> list() {
+		return sDao.list(0, 1000);
+	}
+	
+	// Student & StudentDetail CRUD
+	
 	@Override
 	public Student getById(int id) {
 		return sDao.select(id);
 	}
 	
-	@Override
-	public void logout(String ticket) {
-		stDao.setStatus(ticket, 1);
+	public void addStudent(Student student) {
+		addStudentDetail(student.getStudentDetail());
+		sDao.add(student);
+	}
+	
+	/**
+	 * <b>为什么要把这一方法独立出来？</b>
+	 * 因为存在暂未录入StudentDetail的Student。此时他的detail_id是null，<br>
+	 * 而在系统内部的处理中用student.studentDetail.id = -1来表示这种情况。<br>
+	 * 在这种情形下，就必须先新增一条StudentDetail的记录。<br>
+	 * 也就因此这个方法不能像其他的CRUD那样与Student一起执行。
+	 * @param td
+	 */
+	public void addStudentDetail(StudentDetail td) {
+		sdDao.add(td);
+	}
+	
+	public void updateStudent(Student student) {
+		sdDao.update(student.getStudentDetail());
+		sDao.update(student);
+	}
+	
+	public void deleteStudent(int tid) {
+		Student t = getById(tid);
+		StudentDetail td = t.getStudentDetail();
+		sDao.delete(t.getId());
+		sdDao.delete(td.getId());
 	}
 }

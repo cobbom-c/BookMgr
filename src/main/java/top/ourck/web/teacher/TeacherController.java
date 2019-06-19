@@ -1,4 +1,4 @@
-package top.ourck.web;
+package top.ourck.web.teacher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,29 +6,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import top.ourck.service.StudentService;
+import top.ourck.service.TeacherService;
 
 
 @Controller
-@RequestMapping("/stu")
-public class StudentController {
+@RequestMapping("/tch")
+public class TeacherController {
 
 	@Autowired
-	private StudentService studentService;
+	private TeacherService teacherService;
 	
-	@RequestMapping(value = {"/", "", "/index"})
-	public String index() {
-		return "stu/index";
-	}
-	
-	@RequestMapping("/bookorder")
-	public String bookMgr(Model model) {
-		return "stu/bookOrder";
+	@RequestMapping(value = {"", "/index", "/"})
+	public String index(Model model) {
+		return "tch/index";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(@CookieValue("ticket") String ticket) {
-		studentService.logout(ticket);
+		teacherService.logout(ticket);
 		return "redirect:/login/auth";
+	}
+	
+	@RequestMapping("/bookmgr")
+	public String bookMgr(Model model) {
+		return "tch/bookMgr";
 	}
 }

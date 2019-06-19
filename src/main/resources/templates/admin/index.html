@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="admin/header::head"></head>
+
+<body>
+	<div th:include="admin/header::headerBar"></div>
+	
+	<h1 style="text-align: center; padding: 20px" th:text="|欢迎来到管理员系统，${verifiedUser.userName}！|"></h1>
+	
+	<div th:include="admin/footer::footerBar"></div>
+</body>
+</html>

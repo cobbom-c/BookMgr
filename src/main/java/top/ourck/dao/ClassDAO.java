@@ -1,10 +1,13 @@
 package top.ourck.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -27,6 +30,7 @@ public interface ClassDAO extends SimpleDAO<Class> {
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
+	String LIST_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "LIMIT #{start}, #{offset}";
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
@@ -44,4 +48,8 @@ public interface ClassDAO extends SimpleDAO<Class> {
 				one = @One(select = "top.ourck.dao.MajorDAO.select"))
 	})
 	Class select(int id);
+	
+	@Select(LIST_SQL)
+	List<Class> list(@Param("start") int start,
+						@Param("offset") int offset);
 }

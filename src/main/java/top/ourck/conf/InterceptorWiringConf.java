@@ -28,9 +28,9 @@ public class InterceptorWiringConf implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(uaInterceptor);
-		registry.addInterceptor(taInterceptor).addPathPatterns("/tch", "/tch/*", "/tch/*/");
-		registry.addInterceptor(saInterceptor).addPathPatterns("/stu", "/stu/*", "/stu/*/");
-		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin", "/admin/*", "/admin/*/");
+		registry.addInterceptor(taInterceptor).addPathPatterns("/tch", "/tch/**");
+		registry.addInterceptor(saInterceptor).addPathPatterns("/stu", "/stu/**");
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin", "/admin/**");
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}
 
