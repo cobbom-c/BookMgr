@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import top.ourck.beans.UserType;
 import top.ourck.beans.util.User;
 import top.ourck.beans.util.UserHolder;
 import top.ourck.service.LoginTicketService;
@@ -66,12 +65,8 @@ public class RememberedUserInterceptor extends HandlerInterceptorAdapter {
 		
 		for(Cookie ck : cookies) {
 			if(ck.getName().equals("ticket")) {
-				// 查三遍库来进行ticket有效性验证。 HINT 善用短路运算！
-				// FIXME 这里有个问题，万一两张表里边的ticket都一样的话？不过概率很小就是了。
 				User user = null;
-				if((user = ltService.validateTicket(UserType.STUDENT, ck.getValue())) != null ||
-					(user = ltService.validateTicket(UserType.TEACHER, ck.getValue())) != null || 
-					(user = ltService.validateTicket(UserType.ADMIN, ck.getValue())) != null) {
+				if((user = ltService.validateTicket(ck.getValue())) != null) {
 					userHolder.setUser(user);
 					break;
 				}

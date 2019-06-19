@@ -42,6 +42,16 @@ public class LoginTicketService {
 	@Autowired
 	private AdminDAO aDao;
 	
+	public User validateTicket(String ticket) {
+		User user = null;
+		// 查三遍库来进行ticket有效性验证。 HINT 善用短路运算！
+		// FIXME 这里有个问题，万一两张表里边的ticket都一样的话？不过概率很小就是了。
+		if((user = validateTicket(UserType.STUDENT, ticket)) != null ||
+			(user = validateTicket(UserType.TEACHER, ticket)) != null || 
+			(user = validateTicket(UserType.ADMIN, ticket)) != null);
+		return user;
+	}
+	
 	public User validateTicket(UserType type, String ticket) {
 		switch(type) {
 		case ADMIN: return validateAdminTicket(ticket);
