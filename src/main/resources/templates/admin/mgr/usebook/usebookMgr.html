@@ -53,8 +53,14 @@
 				<tbody>
 					<tr th:each="obj : ${objList}">
 						<td th:text="${obj.id}"></td>
-						<td th:text="|${obj.book.id} (${obj.book.bookDetail?.name})|"></td>
-						<td th:text="|${obj.lesson.id} (${obj.lesson.name})|"></td>
+						<td>
+							<a th:text="|${obj.book.id} (${obj.book.bookDetail?.name})|"
+								th:href="|/admin/mgr/book/edit/${obj.book.id}|"></a>
+						</td>
+						<td>
+							<a th:text="|${obj.lesson.id} (${obj.lesson.name})|"
+								th:href="|/admin/mgr/lesson/edit/${obj.lesson.id}|"></a>
+						</td>
 						<td><a th:href="'/admin/mgr/usebook/edit/' + ${obj.id}"> <span
 								class="glyphicon glyphicon-edit"></span>
 						</a></td>
