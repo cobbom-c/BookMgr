@@ -50,6 +50,10 @@ public interface ClassDAO extends SimpleDAO<Class> {
 	Class select(int id);
 	
 	@Select(LIST_SQL)
+	@Results({
+		@Result(column = "mid", property = "major",
+				one = @One(select = "top.ourck.dao.MajorDAO.select"))
+	})
 	List<Class> list(@Param("start") int start,
 						@Param("offset") int offset);
 }

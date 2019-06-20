@@ -51,7 +51,7 @@ public class ClassAndMajorService {
 		classDAO.add(clazz);
 	}
 	
-	public void updateClazz(Class clazz) {
+	public void updateClass(Class clazz) {
 		classDAO.update(clazz);
 	}
 	

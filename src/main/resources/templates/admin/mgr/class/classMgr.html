@@ -20,11 +20,11 @@
 						</tr>
 						<tr>
 							<td>年级<font style="color: red">*</font></td>
-							<td><input id="name" name="name" type="text" class="form-control"></td>
+							<td><input id="grade" name="grade" type="text" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>专业id<font style="color: red">*</font></td>
-							<td><input id="name" name="name" type="text" class="form-control"></td>
+							<td><input id="mid" name="mid" type="text" class="form-control"></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center">
@@ -46,6 +46,7 @@
 						<!-- TABLE HERE! -->
 					
 <!-- 						<th>ID</th> -->
+						<th>ID</th>
 						<th>班级名</th>
 						<th>年级</th>
 						<th>专业id</th>
@@ -56,10 +57,10 @@
 
 				<tbody>
 					<tr th:each="obj : ${objList}">
-						<!-- <td>${item.id}</td> -->
+						<td th:text="${obj.id}"></td>
 						<td th:text="${obj.name}"></td>
 						<td th:text="${obj.grade}"></td>
-						<td th:text="${obj.mid}"></td>
+						<td th:text="|${obj.major.id} (${obj.major.name})|"></td>
 						<td><a th:href="'/admin/mgr/class/edit/' + ${obj.id}"> <span
 								class="glyphicon glyphicon-edit"></span>
 						</a></td>

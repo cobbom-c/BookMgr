@@ -59,6 +59,7 @@
 						<!-- TABLE HERE! -->
 					
 <!-- 						<th>ID</th> -->
+						<th>ID</th>
 						<th>用户名</th>
 						<th>密码</th>
 						<th>真实姓名</th>
@@ -71,7 +72,7 @@
 
 				<tbody>
 					<tr th:each="obj : ${objList}">
-						<!-- <td>${item.id}</td> -->
+						<td th:text="${obj.id}"></td>
 						<td th:text="${obj.userName}"></td>
 						<td th:text="${obj.password}"></td>
 						<td th:text="${obj.studentDetail?.name}"></td>

@@ -58,6 +58,10 @@ public interface StudentDAO extends SimpleDAO<Student>{
 	Student selectByUserName(String userName);
 	
 	@Select(LIST_SQL)
+	@Results({
+		@Result(column = "detail_id", property = "studentDetail",
+				one = @One(select = "top.ourck.dao.StudentDetailDAO.select"))		
+	})
 	List<Student> list(@Param("start") int start,
 						@Param("offset") int offset);
 	
