@@ -15,6 +15,8 @@ import top.ourck.service.ClassAndMajorService;
 @RequestMapping("/admin/mgr/major")
 public class MajorController {
 
+	private static final String HOME_PAGE = "/admin/mgr/major";
+	
 	@Autowired
 	private ClassAndMajorService cmService;
 	
@@ -29,13 +31,13 @@ public class MajorController {
 		Major major = new Major();
 		major.setName(name);
 		cmService.addMajor(major);
-		return "redirect:/admin/mgr/major";
+		return "redirect:" + HOME_PAGE;
 	}
 	
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable("id") int id) {
 		cmService.deleteMajor(id);
-		return "redirect:/admin/mgr/major";
+		return "redirect:" + HOME_PAGE;
 	}
 	
 	@RequestMapping("/edit/{id}")
@@ -46,11 +48,11 @@ public class MajorController {
 	}
 	
 	@RequestMapping("/update")
-	public String uodate(@RequestParam("id") int id,
+	public String update(@RequestParam("id") int id,
 							@RequestParam("name") String name) {
 		Major major = cmService.getMajorById(id);
 		major.setName(name);
 		cmService.updateMajor(major);
-		return "redirect:/admin/mgr/major";
+		return "redirect:" + HOME_PAGE;
 	}
 }

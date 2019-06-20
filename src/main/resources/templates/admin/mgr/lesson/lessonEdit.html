@@ -1,0 +1,150 @@
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="admin/header::head"></head>
+
+<body>
+	<div th:include="admin/header::headerBar"></div>
+
+	<div class="container">
+
+		<div class="panel panel-warning addDiv" style="“width: 550px;">
+			<div class="panel-heading" th:text="|编辑课程信息 - id = ${obj.id}|"></div>
+			<div class="panel-body">
+				<form method="post" id="addForm" action="../update">
+					<table class="addTable table table-responsive table-striped table-hover">
+						
+						<!-- TABLE HERE! -->
+						
+						<tr>
+							<td>课程名<font style="color: red">*</font></td>
+							<td>
+								<input id="name" name="name" type="text" class="form-control"
+									th:value="${obj.name}">
+								<input id="id" name="id" type="hidden" class="form-control"
+									th:value="${obj.id}">
+									
+							</td>
+						</tr>
+						<tr th:object="${obj.lessonDetail}">
+							<td>
+								详细信息
+								<input id="detail_id" name="detail_id" type="hidden" class="form-control"
+									th:value="*{id}">
+							</td>
+							<td>
+								<table class="addTable table table-responsive table-striped table-hover">
+									<tr>
+										<td>课程编码</td>
+										<td><input id="lesson_code" name="lesson_code" type="text" class="form-control"
+												th:value="*{lessonCode}"></td>
+									<tr>
+										<td>课程类型</td>
+										<td>
+											<div th:switch="*{type}">
+												<div th:case="'选修'">
+													<input id="type" name="type" type="radio" checked value="选修">选修
+													<input id="type" name="type" type="radio" value="必修">必修
+												</div>
+												<div th:case="'必修'">
+													<input id="type" name="type" type="radio" value="选修">选修
+													<input id="type" name="type" type="radio" checked value="必修">必修
+												</div>
+												<div th:case="*">
+													<input id="type" name="type" type="radio" value="选修">选修
+													<input id="type" name="type" type="radio" value="必修">必修
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>开课级别</td>
+										<td>
+											<div th:switch="*{education}">
+												<div th:case="'本科'">
+													<input id="education" name="education" type="radio" checked value="本科">本科
+													<input id="education" name="education" type="radio" value="研究生">研究生
+												</div>
+												<div th:case="'研究生'">
+													<input id="education" name="education" type="radio" value="本科">本科
+													<input id="education" name="education" type="radio" checked value="研究生">研究生
+												</div>
+												<div th:case="*">
+													<input id="education" name="education" type="radio" value="本科">本科
+													<input id="education" name="education" type="radio" value="研究生">研究生
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>上课地点</td>
+										<td><input id="pos" name="pos" type="text" class="form-control"
+												th:value="*{pos}"></td>
+									<tr>
+									<tr>
+										<td>授课语言</td>
+										<td><input id="language" name="language" type="text" class="form-control"
+												th:value="*{language}"></td>
+									<tr>
+<!-- 									<tr>
+										<td>最大学生数</td>
+										<td><input id="max_stunum" name="max_stunum" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>实际学生数</td>
+										<td><input id="stunum" name="stunum" type="text" class="form-control"></td>
+									<tr> -->
+									<tr>
+										<td>起止周</td>
+										<td>
+											<input id="begin_week" name="begin_week" type="text" th:value="*{beginWeek}">
+											-
+											<input id="end_week" name="end_week" type="text" th:value="*{endWeek}"> 
+										</td>
+									<tr>
+									<tr>
+										<td>周数</td>
+										<td><input id="total_week" name="total_week" type="text" class="form-control"
+												th:value="*{totalWeek}"></td>
+									<tr>
+									<tr>
+										<td>实践周</td>
+										<td><input id="practice_week" name="practice_week" type="text" class="form-control"
+												th:value="*{practiceWeek}"></td>
+									<tr>
+									<tr>
+										<td>周课时</td>
+										<td><input id="hours_weekly" name="hours_weekly" type="text" class="form-control"
+												th:value="*{hoursWeekly}"></td>
+									<tr>
+									<tr>
+										<td>总课时</td>
+										<td><input id="total_hours" name="total_hours" type="text" class="form-control"
+												th:value="*{totalHours}"></td>
+									<tr>
+									<tr>
+										<td>学分</td>
+										<td><input id="score" name="score" type="text" class="form-control"
+												th:value="*{score}"></td>
+									<tr>
+									<tr>
+										<td>授课学期</td>
+										<td><input id="semaster" name="semaster" type="text" class="form-control"
+												th:value="*{semaster}"></td>
+									<tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">提交修改</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+	
+			</div>
+		</div>	
+	</div>
+
+	<div th:include="admin/footer::footerBar"></div>
+</body>
+</html>

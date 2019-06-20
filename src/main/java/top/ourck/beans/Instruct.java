@@ -3,7 +3,6 @@ package top.ourck.beans;
 public class Instruct {
 
 	private int id;
-
 	private Teacher teacher;
 	private Lesson lesson;
 	

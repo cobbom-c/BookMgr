@@ -1,9 +1,15 @@
 package top.ourck.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -23,6 +29,7 @@ public interface LessonDAO extends SimpleDAO<Lesson> {
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
+	String LIST_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "LIMIT #{start}, #{offset}";
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
@@ -35,5 +42,17 @@ public interface LessonDAO extends SimpleDAO<Lesson> {
 	void update(Lesson obj);
 	
 	@Select(SELECT_SQL)
+	@Results({
+		@Result(column = "detail_id", property = "lessonDetail",
+				one = @One(select = "top.ourck.dao.LessonDetailDAO.select"))
+	})
 	Lesson select(int id);
+	
+	@Select(LIST_SQL)
+	@Results({
+		@Result(column = "detail_id", property = "lessonDetail",
+				one = @One(select = "top.ourck.dao.LessonDetailDAO.select"))
+	})
+	List<Lesson> list(@Param("start") int start,
+						@Param("offset") int offset);
 }

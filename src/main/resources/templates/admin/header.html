@@ -15,14 +15,18 @@
 			</div>
 	
 			<div>
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav nav-list">
 					<li><a href="/admin/index" th:text="|Welcome, ${verifiedUser.userName}!|"></a>
 					<li><a href="/admin/mgr/teacher">教师管理</a></li>
 					<li><a href="/admin/mgr/student">学生管理</a></li>
-					<li><a href="#">课程管理</a></li>
-					<li><a href="#">选书管理</a></li>
 					<li><a href="/admin/mgr/major">专业管理</a></li>
 					<li><a href="/admin/mgr/class">班级管理</a></li>
+					<li><a href="/admin/mgr/lesson">课程管理</a></li>
+				</ul>
+				<ul class="nav navbar-nav nav-list">
+					<li><a href="/admin/mgr/attend">选课管理</a></li>
+					<li><a href="#">授课管理</a></li>
+					<li><a href="#">选书管理</a></li>
 					<li><a href="#">总表查看</a></li>
 					<li><a href="/admin/logout">退出登陆</a></li>
 				</ul>

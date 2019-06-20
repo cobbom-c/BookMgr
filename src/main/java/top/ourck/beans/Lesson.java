@@ -2,7 +2,7 @@ package top.ourck.beans;
 
 public class Lesson {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private LessonDetail lessonDetail;
 	
@@ -10,18 +10,18 @@ public class Lesson {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Lesson(int id, String name, LessonDetail lessonDetail) {
+	public Lesson(Integer id, String name, LessonDetail lessonDetail) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.lessonDetail = lessonDetail;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -40,5 +40,6 @@ public class Lesson {
 	public void setLessonDetail(LessonDetail lessonDetail) {
 		this.lessonDetail = lessonDetail;
 	}
-
+	
+	
 }

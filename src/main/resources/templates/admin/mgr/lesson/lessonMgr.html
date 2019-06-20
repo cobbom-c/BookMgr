@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/admin/header::head"></head>
+
+<body>
+	<div th:include="/admin/header::headerBar"></div>
+
+	<div class="container">
+
+		<div class="panel panel-warning addDiv" style="“width: 550px;">
+			<div class="panel-heading">新增课程</div>
+			<div class="panel-body">
+				<form method="post" id="addForm" action="lesson/add">
+					<table class="addTable table table-responsive table-striped table-hover">
+						
+						<!-- TABLE HERE! -->
+						
+						<tr>
+							<td>课程名<font style="color: red">*</font></td>
+							<td><input id="name" name="name" type="text" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>详细信息</td>
+							<td>
+								<table class="addTable table table-responsive table-striped table-hover">
+									<tr>
+										<td>课程编码</td>
+										<td><input id="lesson_code" name="lesson_code" type="text" class="form-control"></td>
+									<tr>
+										<td>课程类型</td>
+										<td>
+											<input id="type" name="type" type="radio" checked value="选修">选修
+											<input id="type" name="type" type="radio" value="必修">必修
+										</td>
+									</tr>
+									<tr>
+										<td>开课级别</td>
+										<td>
+											<input id="education" name="education" type="radio" checked value="本科">本科
+											<input id="education" name="education" type="radio" value="研究生">研究生
+										</td>
+									</tr>
+									<tr>
+										<td>上课地点</td>
+										<td><input id="pos" name="pos" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>授课语言</td>
+										<td><input id="language" name="language" type="text" class="form-control"></td>
+									<tr>
+<!-- 									<tr>
+										<td>最大学生数</td>
+										<td><input id="max_stunum" name="max_stunum" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>实际学生数</td>
+										<td><input id="stunum" name="stunum" type="text" class="form-control"></td>
+									<tr> -->
+									<tr>
+										<td>起止周</td>
+										<td>
+											<input id="begin_week" name="begin_week" type="text">
+											-
+											<input id="end_week" name="end_week" type="text"> 
+										</td>
+									<tr>
+									<tr>
+										<td>周数</td>
+										<td><input id="total_week" name="total_week" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>实践周</td>
+										<td><input id="practice_week" name="practice_week" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>周课时</td>
+										<td><input id="hours_weekly" name="hours_weekly" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>总课时</td>
+										<td><input id="total_hours" name="total_hours" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>学分</td>
+										<td><input id="score" name="score" type="text" class="form-control"></td>
+									<tr>
+									<tr>
+										<td>授课学期</td>
+										<td><input id="semaster" name="semaster" type="text" class="form-control"></td>
+									<tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">新增</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+
+		<div class="listDataTableDiv">
+			<table
+				class="table table-striped table-bordered table-hover table-condensed">
+				<thead>
+					<tr class="success">
+					
+						<!-- TABLE HERE! -->
+					
+<!-- 						<th>ID</th> -->
+						<th>ID</th>
+						<th>课程名</th>
+						<th>课程代码</th>
+						<th>课程类型</th>
+						<th>开课级别</th>
+						<th>上课地点</th>
+						<th>授课语言</th>
+<!-- 						<th>最大学生数</th>
+						<th>实际学生数</th> -->
+						<th>起止周</th>
+						<th>总周数</th>
+						<th>周学时</th>
+						<th>实践周</th>
+						<th>总学时</th>
+						<th>学分</th>
+						<th>授课学期</th>
+						<th>编辑</th>
+						<th>删除</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="obj : ${objList}">
+						<td th:text="${obj.id}"></td>
+						<td th:text="${obj.name}"></td>
+						<td th:text="${obj.lessonDetail?.lessonCode}"></td>
+						<td th:text="${obj.lessonDetail?.type}"></td>
+						<td th:text="${obj.lessonDetail?.education}"></td>
+						<td th:text="${obj.lessonDetail?.pos}"></td>
+						<td th:text="${obj.lessonDetail?.language}"></td>
+<!-- 						<td th:text="${obj.lessonDetail?.maxStunum}"></td>
+						<td th:text="${obj.lessonDetail?.stunum}"></td> -->
+						<td th:text="${obj.lessonDetail?.beginWeek == null ? ' ' : obj.lessonDetail?.beginWeek}
+								+ ' - ' + ${obj.lessonDetail?.endWeek == null ? ' ' : obj.lessonDetail?.endWeek}"></td>
+						<td th:text="${obj.lessonDetail?.totalWeek}"></td>
+						<td th:text="${obj.lessonDetail?.hoursWeekly}"></td>
+						<td th:text="${obj.lessonDetail?.practiceWeek}"></td>
+						<td th:text="${obj.lessonDetail?.totalHours}"></td>
+						<td th:text="${obj.lessonDetail?.score}"></td>
+						<td th:text="${obj.lessonDetail?.semaster}"></td>
+						<td><a th:href="'/admin/mgr/lesson/edit/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-edit"></span>
+						</a></td>
+						<td><a th:href="'/admin/mgr/lesson/delete/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-trash"></span>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:include="/admin/footer::footerBar"></div>
+</body>
+</html>
