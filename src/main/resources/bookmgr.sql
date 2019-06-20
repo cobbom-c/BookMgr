@@ -11,8 +11,8 @@
 -- 
 -- 执行这个脚本，将会在本地数据库中新建一个名为bookmgr的数据库，
 -- 里面有各种表（当然是空的）
+CREATE SCHEMA `bookmgr` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
 USE bookmgr;
-
 -- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
 -- Host: localhost    Database: bookmgr
