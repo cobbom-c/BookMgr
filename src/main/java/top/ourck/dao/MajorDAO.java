@@ -1,27 +1,21 @@
 package top.ourck.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
+import org.apache.ibatis.annotations.*;
 import top.ourck.beans.Major;
+
+import java.util.List;
 
 @Mapper
 public interface MajorDAO extends SimpleDAO<Major> {
 
 	String TABLE_NAME = " major ";
-	String UPDATE_FIELDS = " name ";
+	String UPDATE_FIELDS = " name, college ";
 	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
 	
-	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{name} )";
+	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{name}, #{college} )";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
 			+ "name = #{name} "
+			+ "college = #{college}"
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";

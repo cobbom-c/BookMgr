@@ -5,6 +5,7 @@ public class StudentDetail {
 	private int id;
 	private String name;
 	private String hometown;
+	private String phone;
 	private Class clazz;
 	
 	public StudentDetail() {
@@ -16,6 +17,14 @@ public class StudentDetail {
 		this.id = id;
 		this.name = name;
 		this.hometown = hometown;
+		this.clazz = clazz;
+	}
+
+	public StudentDetail(int id, String name, String hometown, String phone, Class clazz) {
+		this.id = id;
+		this.name = name;
+		this.hometown = hometown;
+		this.phone = phone;
 		this.clazz = clazz;
 	}
 
@@ -50,5 +59,12 @@ public class StudentDetail {
 	public void setClazz(Class clazz) {
 		this.clazz = clazz;
 	}
-	
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

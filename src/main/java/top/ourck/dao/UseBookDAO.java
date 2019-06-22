@@ -1,19 +1,9 @@
 package top.ourck.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
+import org.apache.ibatis.annotations.*;
 import top.ourck.beans.UseBook;
+
+import java.util.List;
 
 @Mapper
 public interface UseBookDAO extends SimpleDAO<UseBook> {
@@ -49,7 +39,16 @@ public interface UseBookDAO extends SimpleDAO<UseBook> {
 				one = @One(select = "top.ourck.dao.LessonDAO.select"))
 	})
 	UseBook select(int id);
-	
+
+	@Select("SELECT lid,bid FROM use_book WHERE lid = #{lid}")
+	@Results({
+			@Result(column = "bid", property = "book",
+					one = @One(select = "top.ourck.dao.BookDAO.select")),
+			@Result(column = "lid", property = "lesson",
+					one = @One(select = "top.ourck.dao.LessonDAO.select"))
+	})
+	UseBook selectByLid(int lid);
+
 	@Select(LIST_SQL)
 	@Results({
 		@Result(column = "bid", property = "book",

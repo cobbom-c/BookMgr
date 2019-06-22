@@ -5,7 +5,8 @@ public class BookOrder {
 	private int id;
 	private Book book;
 	private int num;
-	
+	private Student student;
+
 	public BookOrder() {
 		// TODO Auto-generated constructor stub
 	}
@@ -15,6 +16,13 @@ public class BookOrder {
 		this.id = id;
 		this.book = book;
 		this.num = num;
+	}
+
+	public BookOrder(int id, Book book, int num, Student student) {
+		this.id = id;
+		this.book = book;
+		this.num = num;
+		this.student = student;
 	}
 
 	public int getId() {
@@ -40,5 +48,13 @@ public class BookOrder {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 }

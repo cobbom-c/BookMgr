@@ -1,18 +1,17 @@
 package top.ourck.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import top.ourck.beans.Student;
 import top.ourck.beans.StudentDetail;
 import top.ourck.beans.UserType;
 import top.ourck.dao.StudentDAO;
 import top.ourck.dao.StudentDetailDAO;
 import top.ourck.dao.StudentTicketDAO;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service

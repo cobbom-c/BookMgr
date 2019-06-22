@@ -16,13 +16,14 @@ import top.ourck.beans.StudentDetail;
 public interface StudentDetailDAO extends SimpleDAO<StudentDetail> {
 
 	String TABLE_NAME = " " + "student_detail" + " ";
-	String UPDATE_FIELDS = " " + "name, hometown, cid" + " ";
+	String UPDATE_FIELDS = " " + "name, hometown, phone, cid" + " ";
 	String SELECT_FIELDS = " id," + UPDATE_FIELDS;
 	
-	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{name}, #{hometown}, #{clazz.id} )";
+	String ADD_SQL = "INSERT INTO" + TABLE_NAME + "(" + UPDATE_FIELDS + ")" + " VALUES( #{name}, #{hometown}, #{phone}, #{clazz.id} )";
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
 			+ "name = #{name}, "
 			+ "hometown = #{hometown}, "
+			+ "phone = #{phone}"
 			+ "cid = #{clazz.id} "
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";

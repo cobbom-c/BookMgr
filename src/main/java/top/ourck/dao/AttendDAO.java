@@ -1,19 +1,9 @@
 package top.ourck.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
+import org.apache.ibatis.annotations.*;
 import top.ourck.beans.Attend;
+
+import java.util.List;
 
 @Mapper
 public interface AttendDAO extends SimpleDAO<Attend> {
@@ -50,7 +40,17 @@ public interface AttendDAO extends SimpleDAO<Attend> {
 		
 	})
 	Attend select(int id);
-	
+
+	@Select("SELECT cid,lid FROM attend WHERE cid = #{cid}")
+	@Results({
+			@Result(column = "cid", property = "clazz",
+					one = @One(select = "top.ourck.dao.ClassDAO.select")),
+			@Result(column = "lid", property = "lesson",
+					one = @One(select = "top.ourck.dao.LessonDAO.select"))
+
+	})
+	List<Attend> selectByCid(int cid);
+
 	@Select(LIST_SQL)
 	@Results({
 		@Result(column = "cid", property = "clazz", 
