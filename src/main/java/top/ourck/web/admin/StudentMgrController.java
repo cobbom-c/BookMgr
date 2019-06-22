@@ -48,6 +48,7 @@ public class StudentMgrController {
 						@RequestParam("password") String password,
 						@RequestParam("name") String detailName,
 						@RequestParam("hometown") String detailHomeTown,
+						@RequestParam("phone") String detailPhone,
 						@RequestParam("cid") String detailCid) {
 		userName = StringUtil.asNull(userName);
 		password = StringUtil.asNull(password);
@@ -58,6 +59,7 @@ public class StudentMgrController {
 			StudentDetail td = new StudentDetail(); 
 			td.setName(StringUtil.asNull(detailName));
 			td.setHometown(StringUtil.asNull(detailHomeTown));
+			td.setPhone(StringUtil.asNull(detailPhone));
 			Class clazz = ClassService.getById(Integer.parseInt(StringUtil.asNull(detailCid)));
 			td.setClazz(clazz);
 			if(detailId == -1) { // 如果这个人之前没有StudentDetail，先给他新建一个。
@@ -84,6 +86,7 @@ public class StudentMgrController {
 						@RequestParam("password") String password,
 						@RequestParam("name") String detailName,
 						@RequestParam("hometown") String detailHomeTown,
+						@RequestParam("phone") String detailPhone,
 						@RequestParam("cid") String detailCid) {
 		userName = StringUtil.asNull(userName);
 		password = StringUtil.asNull(password);
@@ -93,8 +96,8 @@ public class StudentMgrController {
 		else {
 			StudentDetail td = new StudentDetail(); 
 			td.setName(StringUtil.asNull(detailName));
-			td.setName(StringUtil.asNull(detailName));
 			td.setHometown(StringUtil.asNull(detailHomeTown));
+			td.setPhone(StringUtil.asNull(detailPhone));
 			if(StringUtil.asNull(detailCid) == null) {
 				td.setClazz(null);
 			}

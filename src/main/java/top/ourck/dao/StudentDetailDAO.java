@@ -23,7 +23,7 @@ public interface StudentDetailDAO extends SimpleDAO<StudentDetail> {
 	String UPDATE_SQL = "UPDATE" + TABLE_NAME + "SET "
 			+ "name = #{name}, "
 			+ "hometown = #{hometown}, "
-			+ "phone = #{phone}"
+			+ "phone = #{phone}, "
 			+ "cid = #{clazz.id} "
 			+ "WHERE id = #{id}";
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";

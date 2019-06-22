@@ -29,7 +29,9 @@ public class UseBookService {
 		return uDao.select(id);
 	}
 
-	public UseBook getUseBookByLid(int lid){return uDao.selectByLid(lid);}
+	public List<UseBook> getUseBookByLid(int lid) {
+		return uDao.selectByLid(lid);
+	}
 
 	public void deleteUseBook(int id) {
 		uDao.delete(id);

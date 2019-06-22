@@ -47,7 +47,7 @@ public interface UseBookDAO extends SimpleDAO<UseBook> {
 			@Result(column = "lid", property = "lesson",
 					one = @One(select = "top.ourck.dao.LessonDAO.select"))
 	})
-	UseBook selectByLid(int lid);
+	List<UseBook> selectByLid(int lid);
 
 	@Select(LIST_SQL)
 	@Results({

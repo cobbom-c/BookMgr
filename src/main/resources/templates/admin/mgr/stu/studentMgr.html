@@ -34,6 +34,10 @@
 										<td><input id="hometown" name="hometown" type="text" class="form-control"></td>
 									</tr>
 									<tr>
+										<td>个人电话</td>
+										<td><input id="phone" name="phone" type="text" class="form-control"></td>
+									</tr>
+									<tr>
 										<td>班级id</td>
 										<td><input id="cid" name="cid" type="text" class="form-control"></td>
 									</tr>
@@ -63,8 +67,9 @@
 						<th>用户名</th>
 						<th>密码</th>
 						<th>真实姓名</th>
-						<th>生源地</th>
 						<th>班级id</th>
+						<th>生源地</th>
+						<th>个人电话</th>
 						<th>编辑</th>
 						<th>删除</th>
 					</tr>
@@ -76,11 +81,12 @@
 						<td th:text="${obj.userName}"></td>
 						<td th:text="${obj.password}"></td>
 						<td th:text="${obj.studentDetail?.name}"></td>
-						<td th:text="${obj.studentDetail?.hometown}"></td>
 						<td>
 							<a th:text="|${obj.studentDetail?.clazz?.id} (${obj.studentDetail?.clazz?.name})|"
 								th:href="|/admin/mgr/class/edit/${obj.studentDetail?.clazz?.id}|"></a>
 						</td>
+						<td th:text="${obj.studentDetail?.hometown}"></td>
+						<td th:text="${obj.studentDetail?.phone}"></td>
 						<td><a th:href="'/admin/mgr/student/edit/' + ${obj.id}"> <span
 								class="glyphicon glyphicon-edit"></span>
 						</a></td>

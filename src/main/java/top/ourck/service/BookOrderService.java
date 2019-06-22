@@ -12,7 +12,7 @@ public class BookOrderService {
 
     public int getNumByIdAndBid(int uid ,int bid)
     {
-        BookOrder bo = boDao.select(uid, bid);
+        BookOrder bo = boDao.selectByUidBid(uid, bid);
         if(bo == null)
             return 1;
         else
