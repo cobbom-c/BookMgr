@@ -77,7 +77,10 @@
 						<td th:text="${obj.password}"></td>
 						<td th:text="${obj.studentDetail?.name}"></td>
 						<td th:text="${obj.studentDetail?.hometown}"></td>
-						<td th:text="${obj.studentDetail?.clazz?.id}"></td>
+						<td>
+							<a th:text="|${obj.studentDetail?.clazz?.id} (${obj.studentDetail?.clazz?.name})|"
+								th:href="|/admin/mgr/class/edit/${obj.studentDetail?.clazz?.id}|"></a>
+						</td>
 						<td><a th:href="'/admin/mgr/student/edit/' + ${obj.id}"> <span
 								class="glyphicon glyphicon-edit"></span>
 						</a></td>
