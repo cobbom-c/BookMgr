@@ -30,6 +30,11 @@ public interface LessonDAO extends SimpleDAO<Lesson> {
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String LIST_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "LIMIT #{start}, #{offset}";
+	// 这句SQL比较特殊，需要单独修改！
+	String SEARCH_SQL = "SELECT" + SELECT_FIELDS
+					+ "FROM" + TABLE_NAME + "LEFT JOIN "
+							+ "( SELECT lesson_code, id AS did FROM" + LessonDetailDAO.TABLE_NAME + ") dt ON detail_id = dt.did "
+					+ "WHERE name LIKE '%${keyword}%' OR lesson_code LIKE '%${keyword}%';"; // P.S.#{}写在字符串中识别不了 需要改称${}
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
@@ -55,4 +60,11 @@ public interface LessonDAO extends SimpleDAO<Lesson> {
 	})
 	List<Lesson> list(@Param("start") int start,
 						@Param("offset") int offset);
+	
+	@Select(SEARCH_SQL)
+	@Results({
+		@Result(column = "detail_id", property = "lessonDetail",
+				one = @One(select = "top.ourck.dao.LessonDetailDAO.select"))
+	})
+	List<Lesson> search(@Param("keyword") String keyword);
 }

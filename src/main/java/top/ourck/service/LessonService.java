@@ -44,4 +44,7 @@ public class LessonService {
 		ldDao.delete(l.getLessonDetail().getId());
 	}
 	
+	public List<Lesson> searchByNameOrCode(String keyword) {
+		return lDao.search(keyword);
+	}
 }
