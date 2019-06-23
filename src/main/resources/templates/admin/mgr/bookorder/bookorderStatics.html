@@ -1,0 +1,46 @@
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/admin/header::head"></head>
+
+<body>
+	<div th:include="/admin/header::headerBar"></div>
+
+	<div class="container">
+
+		<div class="listDataTableDiv">
+			<table
+				class="table table-striped table-bordered table-hover table-condensed">
+				<thead>
+					<tr class="success">
+					
+						<!-- TABLE HERE! -->
+					
+<!-- 						<th>ID</th> -->
+						<th>书本ID</th>
+						<th>数量</th>
+						<th>编辑</th>
+						<th>删除</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="obj : ${objList}">
+						<td>
+							<a th:text="|${obj.book.id} (${obj.book.bookDetail?.name})|"
+								th:href="|/admin/mgr/book/edit/${obj.book.id}|"></a>
+						</td>
+						<td th:text="${obj.num}"></td>
+						<td><a th:href="'/admin/mgr/bookorder/edit/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-edit"></span>
+						</a></td>
+						<td><a th:href="'/admin/mgr/bookorder/delete/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-trash"></span>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:include="/admin/footer::footerBar"></div>
+</body>
+</html>

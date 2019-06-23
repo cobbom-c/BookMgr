@@ -1,0 +1,84 @@
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/admin/header::head"></head>
+
+<body>
+	<div th:include="/admin/header::headerBar"></div>
+
+	<div class="container">
+
+		<div class="panel panel-warning addDiv" style="“width: 550px;">
+			<div class="panel-heading">新增学生选书记录</div>
+			<div class="panel-body">
+				<form method="post" id="addForm" action="bookorder/add">
+					<table class="addTable table table-responsive table-striped table-hover">
+						
+						<!-- TABLE HERE! -->
+						
+						<tr>
+							<td>书本id<font style="color: red">*</font></td>
+							<td><input id="bid" name="bid" type="text" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>学生id<font style="color: red">*</font></td>
+							<td><input id="uid" name="uid" type="text" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>数量<font style="color: red">*</font></td>
+							<td><input id="num" name="num" type="text" class="form-control"></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">新增</button>
+							</td>
+						</tr>
+						
+					</table>
+				</form>
+			</div>
+		</div>
+
+		<div class="listDataTableDiv">
+			<table
+				class="table table-striped table-bordered table-hover table-condensed">
+				<thead>
+					<tr class="success">
+					
+						<!-- TABLE HERE! -->
+					
+<!-- 						<th>ID</th> -->
+						<th>ID</th>
+						<th>书本ID</th>
+						<th>学生ID</th>
+						<th>数量</th>
+						<th>编辑</th>
+						<th>删除</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="obj : ${objList}">
+						<td th:text="${obj.id}"></td>
+						<td>
+							<a th:text="|${obj.book.id} (${obj.book.bookDetail?.name})|"
+								th:href="|/admin/mgr/book/edit/${obj.book.id}|"></a>
+						</td>
+						<td>
+							<a th:text="|${obj.student.id} (${obj.student.userName})|"
+								th:href="|/admin/mgr/student/edit/${obj.student.id}|"></a>
+						</td>
+						<td th:text="${obj.num}"></td>
+						<td><a th:href="'/admin/mgr/bookorder/edit/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-edit"></span>
+						</a></td>
+						<td><a th:href="'/admin/mgr/bookorder/delete/' + ${obj.id}"> <span
+								class="glyphicon glyphicon-trash"></span>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:include="/admin/footer::footerBar"></div>
+</body>
+</html>
