@@ -16,7 +16,10 @@ import top.ourck.service.StudentService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +41,7 @@ public class StudentBookOrderController {
     @GetMapping("/bookorder")
     public String showOrder(Model model)
     {
-        List<Map<String, Object>> bookinfo = null;
+        List<Map<String, Object>> bookinfo = new ArrayList<Map<String,Object>>();
         User user = userholder.getUser();
 
         //处理学生信息
@@ -56,7 +59,7 @@ public class StudentBookOrderController {
 
             for(UseBook ub:usebook)
             {
-                Map<String ,Object> pam = null;
+                Map<String ,Object> pam = new HashMap<String,Object>();
                 pam.put("lessoncode" ,ub.getLesson().getLessonDetail().getLessonCode());
                 pam.put("lessonname" ,ub.getLesson().getName());
                 pam.put("bookname" ,ub.getBook().getBookDetail().getName());
