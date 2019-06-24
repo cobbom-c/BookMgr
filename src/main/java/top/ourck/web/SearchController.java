@@ -46,7 +46,7 @@ public class SearchController {
 	
 	@RequestMapping("/usebook")
 	public String usebookSearch(@RequestParam("lid") Integer lid) {
-		List<UseBook> list = ubDao.selectByLid(lid);
+		List<UseBook> list = ubDao.listByLid(lid);
 		JSONArray jary = new JSONArray();
 		for(UseBook ub : list) {
 			JSONObject jobj = new JSONObject();

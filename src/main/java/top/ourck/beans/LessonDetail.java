@@ -17,7 +17,7 @@ public class LessonDetail {
 	private Integer practiceWeek;
 	private Integer totalHours;
 	private Integer score;
-	private Integer semaster;
+	private String semaster;
 	
 	public LessonDetail() {
 		// TODO Auto-generated constructor stub
@@ -25,7 +25,7 @@ public class LessonDetail {
 
 	public LessonDetail(Integer id, String lessonCode, String type, String education, String pos, String language,
 			Integer maxStunum, Integer stunum, Integer beginWeek, Integer endWeek, Integer totalWeek,
-			Integer hoursWeekly, Integer practiceWeek, Integer totalHours, Integer score, Integer semaster) {
+			Integer hoursWeekly, Integer practiceWeek, Integer totalHours, Integer score, String semaster) {
 		super();
 		this.id = id;
 		this.lessonCode = lessonCode;
@@ -165,13 +165,12 @@ public class LessonDetail {
 		this.score = score;
 	}
 
-	public Integer getSemaster() {
+	public String getSemaster() {
 		return semaster;
 	}
 
-	public void setSemaster(Integer semaster) {
+	public void setSemaster(String semaster) {
 		this.semaster = semaster;
 	}
-	
 	
 }

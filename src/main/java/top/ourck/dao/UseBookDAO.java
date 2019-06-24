@@ -20,6 +20,7 @@ public interface UseBookDAO extends SimpleDAO<UseBook> {
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String LIST_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "LIMIT #{start}, #{offset}";
+	String LIST_BY_LID_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE lid = #{lid}";
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
@@ -40,14 +41,14 @@ public interface UseBookDAO extends SimpleDAO<UseBook> {
 	})
 	UseBook select(int id);
 
-	@Select("SELECT lid,bid FROM use_book WHERE lid = #{lid}")
+	@Select(LIST_BY_LID_SQL)
 	@Results({
 			@Result(column = "bid", property = "book",
 					one = @One(select = "top.ourck.dao.BookDAO.select")),
 			@Result(column = "lid", property = "lesson",
 					one = @One(select = "top.ourck.dao.LessonDAO.select"))
 	})
-	List<UseBook> selectByLid(int lid);
+	List<UseBook> listByLid(int lid);
 
 	@Select(LIST_SQL)
 	@Results({
@@ -58,4 +59,5 @@ public interface UseBookDAO extends SimpleDAO<UseBook> {
 	})
 	List<UseBook> list(@Param("start") int start,
 						@Param("offset") int offset);
+	
 }
