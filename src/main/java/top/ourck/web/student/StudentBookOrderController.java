@@ -1,6 +1,5 @@
 package top.ourck.web.student;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +30,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/stu")
 public class StudentBookOrderController {
+	
     @Autowired
     private StudentBookService studentbookservice;
 
@@ -51,10 +51,11 @@ public class StudentBookOrderController {
 
         //处理学生信息
         Student stu = studentservice.getById(user.getId());
+        model.addAttribute("stuno", stu.getUserName());
         model.addAttribute("academy", stu.getStudentDetail().getClazz().getMajor().getCollege());
         model.addAttribute("date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         model.addAttribute("name", stu.getStudentDetail().getName());
-        model.addAttribute("id", user.getUserName());
+        model.addAttribute("id", user.getId());
         model.addAttribute("major", stu.getStudentDetail().getClazz().getMajor().getName());
         model.addAttribute("grade", stu.getStudentDetail().getClazz().getGrade());
         model.addAttribute("class", stu.getStudentDetail().getClazz().getName());
@@ -69,31 +70,35 @@ public class StudentBookOrderController {
                 Map<String ,String> pam = new HashMap<String, String>();
                 pam.put("lesson_code" , ub.getLesson().getLessonDetail().getLessonCode());
                 pam.put("lesson_name" , ub.getLesson().getName());
+                pam.put("book_id" , "" + ub.getBook().getId());
                 pam.put("book_name" , ub.getBook().getBookDetail().getName());
                 pam.put("book_code" , ub.getBook().getBookDetail().getISBN());
                 pam.put("book_author" , ub.getBook().getBookDetail().getAuthor());
                 pam.put("book_publisher" , ub.getBook().getBookDetail().getInstitute());
-//                pam.put("book_num" , "" + bookorderservice.getNumByIdAndBid(user.getId(), ub.getBook().getId()));
+                pam.put("book_num" , "" + bookorderservice.getNumByIdAndBid(user.getId(), ub.getBook().getId()));
+                pam.put("book_price" , "" + ub.getBook().getBookDetail().getPrice());
                 bookinfo.add(pam);
             }
         }
-        JSONObject jobj = new JSONObject();
         model.addAttribute("bookinfo", bookinfo);
         return "stu/bookOrder";
     }
 
-    @PostMapping("/bookOrder")
+    @PostMapping("/bookorder")
     public String recordOrder(HttpServletRequest req, HttpServletResponse resp)
     {
+    	String uid = req.getParameter("uid");
         Enumeration<String> acceptedBid = req.getParameterNames();
-        String uid = req.getParameter("uid");
         while(acceptedBid.hasMoreElements())
         {
-        	String bid = acceptedBid.nextElement();
+        	String key = acceptedBid.nextElement();
+        	if(key.equals("uid"))
+        		continue; // 上面已经获取过了。因此遍历遇到这个参数应该跳过。
+        	String bid = key;
         	String num = req.getParameter(bid);
         	bookorderservice.updateBookNum(Integer.parseInt(uid), Integer.parseInt(bid), Integer.parseInt(num));
         }
         
-        return "/stu/index";
+        return "redirect:/stu/bookorder";
     }
 }

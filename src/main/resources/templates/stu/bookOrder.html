@@ -98,8 +98,8 @@
 									<td><div align="center">
 											<div>
 												<input type="hidden" value="2016900667">
-												<div title="">
-													<font face="微软雅黑" th:text="${id}"></font>
+												<div>
+													<font face="微软雅黑" th:text="${stuno}"></font>
 												</div>
 											</div>
 										</div></td>
@@ -165,13 +165,12 @@
 								</tr>
 								<tr>
 									<td colspan="6"><div align="center" name="groupGMJCList">
-											<input type="hidden" name="fieldGroupGMJCListCount444189"
-												value="0">
 												
 												
 												
 											<!-- Form begins here! -->
-											<form method="post" action="#">	
+											<form method="post" action="bookorder">	
+												<input id="uid" name="uid" th:value="${id}" class="form-control" type="hidden"></input>
 												<table widgetindex="0" border="1" class="addTable table table-responsive table-striped table-hover">
 													<colgroup>
 														<col width="112">
@@ -192,7 +191,7 @@
 															<th><font size="3">作者</font></th>
 															<th><font size="3">出版社</font></th>
 															<th><font size="3">数量</font></th>
-															<th><font face="Microsoft YaHei" size="3">意见</font></th>
+															<th><font size="3">单价</font></th>
 														</tr>
 													</thead>
 													<tbody th:each="info : ${bookinfo}">
@@ -203,8 +202,10 @@
 															<td th:text="${info['book_code']}"></td>
 															<td th:text="${info['book_author']}"></td>
 															<td th:text="${info['book_publisher']}"></td>
-															<td><input th:value="${info['book_num']}" class="form-control"></input></td>
-															<td></td>
+															<td>
+																<input th:id="${info['book_id']}" th:name="${info['book_id']}" th:value="${info['book_num']}" class="form-control"></input>
+															</td>
+															<td><font style="color: red;" th:text="${info['book_price']}"></font></td>
 														</tr>
 													</tbody>
 												</table>
