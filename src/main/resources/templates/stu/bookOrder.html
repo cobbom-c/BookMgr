@@ -74,6 +74,7 @@
 			<tr class="xdTableContentRow">
 				<td class="xdTableContentCell">
 					<div align="center">
+						<form action="#" th:action="/stu/bookOrder" method="post">
 						<table border="1" class="table-striped table-hover">
 							<tbody>
 								<tr>
@@ -82,7 +83,7 @@
 											<font face="微软雅黑" size="4">姓名</font>
 										</div>
 									</td>
-									<td><div align="center">
+									<td th:text="${stuname}"<div align="center">
 											<font face="微软雅黑"><div>
 													<input type="hidden" value="2016900667">
 													<div title="">陈康</div>
@@ -91,7 +92,7 @@
 									<td><div align="center">
 											<font face="微软雅黑" size="4">学号</font>
 										</div></td>
-									<td><div align="center">
+									<td th:text="${id}"><div align="center">
 											<font face="微软雅黑"><div>
 													<input type="hidden" value="2016900667">
 													<div title="">2016900667</div>
@@ -100,7 +101,7 @@
 									<td><div align="center">
 											<font face="微软雅黑" size="4">专业</font>
 										</div></td>
-									<td><div align="center">
+									<td th:text="${major}"><div align="center">
 											<font face="微软雅黑"><div>
 													<input type="hidden">
 													<div title="">软件工程</div>
@@ -111,7 +112,7 @@
 									<td><div align="center">
 											<font face="微软雅黑" size="4">年级</font>
 										</div></td>
-									<td><div align="center">
+									<td th:text="${grade}"><div align="center">
 											<font face="微软雅黑"><div>
 													<input type="hidden">
 													<div title="">2016</div>
@@ -121,7 +122,7 @@
 											<font face="微软雅黑" size="4">班级</font>
 										</div>
 										<div align="center"></div></td>
-									<td><div align="center">
+									<td th:text="${class}"><div align="center">
 											<div>
 												<input type="hidden" value="2016240206">
 												<div title="">2016240206</div>
@@ -130,7 +131,7 @@
 									<td><div align="center">
 											<font face="微软雅黑" size="4">联系电话</font>
 										</div></td>
-									<td><div align="center">
+									<td th:text="${phone}"><div align="center">
 											<font face="微软雅黑"><div>
 													<input type="hidden" value="18777938612">
 													<div title="">2333333333</div>
@@ -139,9 +140,9 @@
 								</tr>
 								<tr>
 									<td><div align="center">
-											<font face="Microsoft YaHei" size="4">年季</font>
+											<font face="Microsoft YaHei" size="4">学期</font>
 										</div></td>
-									<td colspan="5"><div align="center">
+									<td colspan="5" th:text="${semaster}"><div align="center">
 											<font face="微软雅黑"><div>
 													<input type="hidden" value="2019年春季">
 													<div title="">2019年春季</div>
@@ -175,24 +176,26 @@
 														<th><font face="Microsoft YaHei" size="3">意见</font></th>
 													</tr>
 												</thead>
-												<tbody>
-													<tr>
-														<td>X2016011</td>
-														<td>软件详细设计</td>
-														<td>软件详细设计</td>
-														<td>ABC123445</td>
-														<td>XXX</td>
-														<td>西安交大</td>
-														<td><input value="1"></input></td>
-														<td></td>
-													</tr>
-												</tbody>
+													<tbody>
+														<tr th:each="book:${pam}">
+															<td th:text="${book.lessoncode}">X2016011</td>
+															<td th:text="${book.lessonname}">软件详细设计</td>
+															<td th:text="${book.bookname}">软件详细设计</td>
+															<td th:text="${book.bookcode}">ABC123445</td>
+															<td th:text="${book.bookauthor}">XXX</td>
+															<td th:text="${book.bookpublisher}">西安交大</td>
+															<td><input th:id="${id}" th:value="${book.num}"></input></td>
+															<td></td>
+														</tr>
+													</tbody>
+													<input type="submit" value="提交"/>
+
 											</table>
 										</div></td>
 								</tr>
 							</tbody>
 						</table>
-
+						</form>
 					</div>
 				</td>
 			</tr>
