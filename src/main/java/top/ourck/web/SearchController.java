@@ -38,7 +38,8 @@ public class SearchController {
 			jobj.put("id", l.getId());
 			jobj.put("name", l.getName());
 			jobj.put("code", l.getLessonDetail().getLessonCode());
-			jobj.put("hours", l.getLessonDetail().getTotalHours());
+			jobj.put("hours", l.getLessonDetail().getTotalHours());	
+				//need a semaster
 			jary.put(jobj);
 		}
 		return jary.toString();

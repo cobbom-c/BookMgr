@@ -6,6 +6,58 @@
 </head>
 
 <body>
+<script>
+	<!--课程搜索 -->
+	function foo(){
+		$.ajax({
+			url:"http://localhost:8080:/search/lesson",
+			type:'post',
+			data:"keyword=" + document.getElementById("search_bar").value,
+			success:function(data){
+				<!-- 添加课程下拉框 -->
+				var objSelect = document.getElementById("search_result_lesson"); 
+				for(var num in data){
+					function jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
+				}
+			}
+		});
+	}
+	
+	<!--书本搜索 -->
+	funciton serachBook(){
+		$.ajax({
+			url:"http://localhost:8080:/search/usebook",
+			type:'post',
+			data:"lid=" + document.getElementById("search_result_lesson").value,
+			success:function(data){
+				<!-- 添加书本下拉框 -->
+				var objSelect = document.getElementById("search_result_book"); 
+				for(var num in data){
+					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
+				}
+			}
+		});
+	}
+	
+	// 向select选项中 加入一个Item 
+	function jsAddItemToSelect(objSelect, objItemText, objItemValue) { 
+		var Item = new Option(objItemText,objItemValue);
+		objSelect.options.add(varItem); 
+	} 
+	 
+	//lesson下拉框响应
+	$("#search_result_lesson").change(function(){
+	     //更改3框，显示课程信息
+	     //ajax获取书本信息
+	     searchBook();
+	    });
+	
+	//book下拉框响应
+	$("#search_result_book").change(function(){
+	     //更改显示书本信息
+	    });
+	
+</script>
 	<div>
 		<nav class="navbar navbar-default container-fluid" role="navigation">
 			<div class="navbar-header">
@@ -38,12 +90,12 @@
 									<tr><td colspan="2">
 										<div class="row" style="margin: 5px;">
 											<div class="form-group">
-												<input id="search_bar" type="text" style="width: 90%">
+												<input id="search_bar" name = "search_bar" type="text" style="width: 90%">
 												<button onclick="foo()" class="btn btn-warning" style="margin: 5px;">搜索</button>
 											</div>
 										</div>
 										<div class="row" style="margin: 5px;">
-											<select id="search_result" class="form-control">
+											<select id="search_result_lesson" name = "search_result_lesson" class="form-control">
 												<option selected value="1">搜索结果</option>
 											</select>
 										</div>
@@ -71,7 +123,7 @@
 									<tr>
 										<td>从该课的以前记录快速完成...</td>
 										<td>
-											<select id="search_result" class="form-control">
+											<select id="search_result_book"  name="search_result_book" class="form-control">
 												<option selected value="1">记录列表</option>
 											</select>
 										</td>
