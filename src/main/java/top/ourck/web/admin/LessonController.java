@@ -42,7 +42,7 @@ public class LessonController {
 						@RequestParam("hours_weekly") Integer hoursWeekly,
 						@RequestParam("total_hours") Integer totalHours,
 						@RequestParam("score") Integer score,
-						@RequestParam("semaster") Integer semaster) {
+						@RequestParam("semaster") String semaster) {
 		LessonDetail ld = new LessonDetail(null,
 									StringUtil.asNull(lessonCode),
 									StringUtil.asNull(type),
@@ -95,7 +95,7 @@ public class LessonController {
 						@RequestParam("hours_weekly") Integer hoursWeekly,
 						@RequestParam("total_hours") Integer totalHours,
 						@RequestParam("score") Integer score,
-						@RequestParam("semaster") Integer semaster) {
+						@RequestParam("semaster") String semaster) {
 		LessonDetail ld = new LessonDetail(detailId,
 										StringUtil.asNull(lessonCode),
 										StringUtil.asNull(type),

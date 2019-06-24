@@ -33,12 +33,14 @@
 										</div></td>
 									<td
 										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
-											<font face="微软雅黑" style="FONT-SIZE: 15pt"><div
-													class="infoplus_labelControlContainer inline">
-													<input type="hidden" value="信息工程学院">
-													<div style="WIDTH: 100%" title=""
-														class="infoplus_control infoplus_labelControl inline">信息工程学院</div>
-												</div></font>
+											<div class="infoplus_labelControlContainer inline">
+												<input type="hidden" value="信息工程学院">
+												<div style="WIDTH: 100%" title=""
+													class="infoplus_control infoplus_labelControl inline">
+													<font face="微软雅黑" style="FONT-SIZE: 15pt"
+														th:text="${academy}"></font>
+												</div>
+											</div>
 										</div></td>
 									<td
 										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
@@ -46,12 +48,13 @@
 										</div></td>
 									<td
 										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
-											<font face="微软雅黑" style="FONT-SIZE: 15pt"><div
-													class="infoplus_labelControlContainer inline">
-													<input type="hidden" value="2016900667">
-													<div style="WIDTH: 100%" title=""
-														class="infoplus_control infoplus_labelControl inline">陈康</div>
-												</div></font>
+											<div class="infoplus_labelControlContainer inline">
+												<input type="hidden" value="2016900667">
+												<div style="WIDTH: 100%" title=""
+													class="infoplus_control infoplus_labelControl inline">
+													<font face="微软雅黑" style="FONT-SIZE: 15pt" th:text="${name}"></font>
+												</div>
+											</div>
 										</div></td>
 									<td
 										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
@@ -59,23 +62,24 @@
 										</div></td>
 									<td
 										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
-											<font face="微软雅黑" style="FONT-SIZE: 15pt"><div
-													class="infoplus_labelControlContainer inline">
-													<input type="hidden" value="1544544000">
-													<div style="WIDTH: 100%" title=""
-														class="infoplus_control infoplus_labelControl inline">2018-12-12</div>
-												</div></font>
+											<div class="infoplus_labelControlContainer inline">
+												<input type="hidden" value="1544544000">
+												<div style="WIDTH: 100%" title=""
+													class="infoplus_control infoplus_labelControl inline">
+													<font face="微软雅黑" style="FONT-SIZE: 15pt" th:text="${date}"></font>
+												</div>
+											</div>
 										</div></td>
 								</tr>
 							</tbody>
 						</table>
-					</div></td>
+					</div>
+				</td>
 			</tr>
-			<tr class="xdTableContentRow">
-				<td class="xdTableContentCell">
+			<tr>
+				<td>
 					<div align="center">
-						<form action="#" th:action="/stu/bookOrder" method="post">
-						<table border="1" class="table-striped table-hover">
+						<table border="1" class="addTable table table-responsive table-striped table-hover">
 							<tbody>
 								<tr>
 									<td>
@@ -83,40 +87,48 @@
 											<font face="微软雅黑" size="4">姓名</font>
 										</div>
 									</td>
-									<td th:text="${stuname}"<div align="center">
-											<font face="微软雅黑"><div>
-													<input type="hidden" value="2016900667">
-													<div title="">陈康</div>
-												</div></font>
+									<td><div align="center">
+											<div>
+												<input type="hidden" value="2016900667">
+												<div title="">
+													<font face="微软雅黑" th:text="${name}"></font>
+												</div>
+											</div>
 										</div></td>
 									<td><div align="center">
 											<font face="微软雅黑" size="4">学号</font>
 										</div></td>
-									<td th:text="${id}"><div align="center">
-											<font face="微软雅黑"><div>
-													<input type="hidden" value="2016900667">
-													<div title="">2016900667</div>
-												</div></font>
+									<td><div align="center">
+											<div>
+												<input type="hidden" value="2016900667">
+												<div title="">
+													<font face="微软雅黑" th:text="${id}"></font>
+												</div>
+											</div>
 										</div></td>
 									<td><div align="center">
 											<font face="微软雅黑" size="4">专业</font>
 										</div></td>
-									<td th:text="${major}"><div align="center">
-											<font face="微软雅黑"><div>
-													<input type="hidden">
-													<div title="">软件工程</div>
-												</div></font>
-										</div></td>
+									<td><div align="center">
+										<div>
+											<input type="hidden">
+											<div title="">
+												<font face="微软雅黑" th:text="${major}"></font>
+											</div>
+										</div>
+									</div></td>
 								</tr>
 								<tr>
 									<td><div align="center">
 											<font face="微软雅黑" size="4">年级</font>
-										</div></td>
-									<td th:text="${grade}"><div align="center">
-											<font face="微软雅黑"><div>
-													<input type="hidden">
-													<div title="">2016</div>
-												</div></font>
+									</div></td>
+									<td><div align="center">
+											<div>
+												<input type="hidden">
+												<div title="">
+													<font face="微软雅黑" th:text="${grade}"></font>
+												</div>
+											</div>
 										</div></td>
 									<td><div align="center">
 											<font face="微软雅黑" size="4">班级</font>
@@ -125,77 +137,86 @@
 									<td th:text="${class}"><div align="center">
 											<div>
 												<input type="hidden" value="2016240206">
-												<div title="">2016240206</div>
+												<div title="" th:text="${class}"></div>
 											</div>
 										</div></td>
 									<td><div align="center">
 											<font face="微软雅黑" size="4">联系电话</font>
 										</div></td>
-									<td th:text="${phone}"><div align="center">
-											<font face="微软雅黑"><div>
-													<input type="hidden" value="18777938612">
-													<div title="">2333333333</div>
-												</div></font>
+									<td><div align="center">
+											<div>
+												<input type="hidden" value="18777938612">
+												<div title="">
+													<font face="微软雅黑" th:text="${phone}"></font>
+												</div>
+											</div>
 										</div></td>
 								</tr>
 								<tr>
 									<td><div align="center">
 											<font face="Microsoft YaHei" size="4">学期</font>
 										</div></td>
-									<td colspan="5" th:text="${semaster}"><div align="center">
-											<font face="微软雅黑"><div>
-													<input type="hidden" value="2019年春季">
-													<div title="">2019年春季</div>
-												</div></font>
+									<td colspan="5"><div align="center">
+											<div>
+												<input type="hidden" value="2019年春季">
+												<div title="">
+													<font face="微软雅黑">2019年春季</font>
+												</div>
+												<!-- "年季" 库里没有！ -->
+											</div>
 										</div></td>
 								</tr>
 								<tr>
 									<td colspan="6"><div align="center" name="groupGMJCList">
 											<input type="hidden" name="fieldGroupGMJCListCount444189"
 												value="0">
-											<table widgetindex="0" border="1">
-												<colgroup>
-													<col width="112">
-													<col width="151">
-													<col width="147">
-													<col width="105">
-													<col width="69">
-													<col width="147">
-													<col width="74">
-													<col width="75">
-												</colgroup>
-												<thead>
-													<tr>
-														<th>课程代码</th>
-														<th><font size="3">课程名称</font></th>
-														<th><font size="3">教材名称</font></th>
-														<th><font size="3">校内书号</font></th>
-														<th><font size="3">作者</font></th>
-														<th><font size="3">出版社</font></th>
-														<th><font size="3">数量</font></th>
-														<th><font face="Microsoft YaHei" size="3">意见</font></th>
-													</tr>
-												</thead>
-													<tbody>
-														<tr th:each="book:${pam}">
-															<td th:text="${book.lessoncode}">X2016011</td>
-															<td th:text="${book.lessonname}">软件详细设计</td>
-															<td th:text="${book.bookname}">软件详细设计</td>
-															<td th:text="${book.bookcode}">ABC123445</td>
-															<td th:text="${book.bookauthor}">XXX</td>
-															<td th:text="${book.bookpublisher}">西安交大</td>
-															<td><input th:id="${id}" th:value="${book.num}"></input></td>
+												
+											<!-- Form begins here! -->
+											<form method="post" action="#">	
+												<table widgetindex="0" border="1" class="addTable table table-responsive table-striped table-hover">
+													<colgroup>
+														<col width="112">
+														<col width="151">
+														<col width="147">
+														<col width="105">
+														<col width="69">
+														<col width="147">
+														<col width="74">
+														<col width="75">
+													</colgroup>
+													<thead>
+														<tr>
+															<th>课程代码</th>
+															<th><font size="3">课程名称</font></th>
+															<th><font size="3">教材名称</font></th>
+															<th><font size="3">ISBN书号</font></th>
+															<th><font size="3">作者</font></th>
+															<th><font size="3">出版社</font></th>
+															<th><font size="3">数量</font></th>
+															<th><font face="Microsoft YaHei" size="3">意见</font></th>
+														</tr>
+													</thead>
+													<tbody th:each="info : ${bookinfo}">
+														<tr>
+															<td th:text="${info['lesson_code']}"></td>
+															<td th:text="${info['lesson_name']}"></td>
+															<td th:text="${info['book_name']}"></td>
+															<td th:text="${info['book_code']}"></td>
+															<td th:text="${info['book_author']}"></td>
+															<td th:text="${info['book_publisher']}"></td>
+															<td><input th:value="${info['book_num']}" class="form-control"></input></td>
 															<td></td>
 														</tr>
 													</tbody>
-													<input type="submit" value="提交"/>
-
-											</table>
-										</div></td>
+												</table>
+												<input type="submit" class="btn btn-success" style="margin: 20px">
+											</form>
+									
+											
+									</div></td>
 								</tr>
 							</tbody>
 						</table>
-						</form>
 					</div>
 				</td>
 			</tr>

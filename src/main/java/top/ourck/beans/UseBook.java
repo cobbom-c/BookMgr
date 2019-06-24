@@ -2,26 +2,26 @@ package top.ourck.beans;
 
 public class UseBook {
 
-	private int id;
+	private Integer id;
 	private Lesson lesson;
 	private Book book;
 	
-	public UseBook(int id, Lesson lesson, Book book) {
+	public UseBook() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public UseBook(Integer id, Lesson lesson, Book book) {
 		super();
 		this.id = id;
 		this.lesson = lesson;
 		this.book = book;
 	}
 
-	public UseBook() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -40,7 +40,6 @@ public class UseBook {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	
 	
 	
 }

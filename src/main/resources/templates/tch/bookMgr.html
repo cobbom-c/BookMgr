@@ -1,75 +1,132 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head th:include="tch/header::head"></head>
+<head>
+	<meta charset="UTF-8">
+	<title>教师教材管理系统 - 教师教材录入</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
 
 <body>
-	<div th:include="tch/header::headerBar"></div>
+	<div>
+		<nav class="navbar navbar-default container-fluid" role="navigation">
+			<div class="navbar-header">
+				<img class="navbar-brand" src="/img/logo.png">
+			</div>
+	
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="/tch/index">Welcome, teacher!</a>
+					<li><a href="/tch/bookmgr">教材管理</a></li>
+					<li><a href="/tch/logout">退出登陆</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
 
 	<div class="container">
 
 		<div class="panel panel-warning addDiv" style="“width: 550px;">
 			<div class="panel-heading">新增教材</div>
 			<div class="panel-body">
-				<form method="post" id="addForm" action="product_add">
-					<table
-						class="addTable table table-responsive table-striped table-hover">
+				<form method="post" id="addForm" action="add">
+					<table class="addTable table table-responsive table-striped table-hover">
+						
+						<!-- 分两栏来录入课本信息，第一栏为课程... -->
 						<tr>
-							<td>课程编号</td>
-							<td><input id="name" name="name" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td>课程名称</td>
-							<td>(这里查库后显示课程信息)</td>
-						</tr>
-						<tr>
-							<td>课程学时</td>
-							<td>(这里查库后显示课程信息)</td>
-						</tr>
-						<tr>
-							<td>教材名</td>
-							<td><input id="name" name="promotePrice" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td>教材书号（ISBN）</td>
-							<td><input id="name" name="promotePrice" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td>教材版别</td>
-							<td><input id="name" name="promotePrice" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td>主编</td>
-							<td><input id="name" name="promotePrice" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td>出版单位</td>
-							<td><input id="name" name="promotePrice" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td>出版时间</td>
-							<td><input id="name" name="promotePrice" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td>获奖及规划情况</td>
-							<td><input id="name" name="promotePrice" type="text"
-								class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input name="is_compulsory" type="radio" value="true">必修</td>
-							<td><input name="is_compulsory" type="radio" value="false">选修</td>
-						</tr>
-
-						<tr>
-							<td colspan="2" align="center">
-								<button type="submit" class="btn btn-success">提 交</button>
+							<td>课程信息</td>
+							<td>
+								<table class="addTable table table-responsive table-striped table-hover">
+									<tr><td colspan="2">
+										<div class="row" style="margin: 5px;">
+											<div class="form-group">
+												<input id="search_bar" type="text" style="width: 90%">
+												<button onclick="foo()" class="btn btn-warning" style="margin: 5px;">搜索</button>
+											</div>
+										</div>
+										<div class="row" style="margin: 5px;">
+											<select id="search_result" class="form-control">
+												<option selected value="1">搜索结果</option>
+											</select>
+										</div>
+									</td></tr>
+									<tr>
+										<td>课程编号</td>
+										<td><font style="color: red;">(这里查库后显示课程信息)</font></td>
+									</tr>
+									<tr>
+										<td>课程名称</td>
+										<td><font style="color: red;">(这里查库后显示课程信息)</font></td>
+									</tr>
+									<tr>
+										<td>课程学时</td>
+										<td><font style="color: red;">(这里查库后显示课程信息)</font></td>
+									</tr>
+								</table>
 							</td>
 						</tr>
+						<!-- 第二栏为书本信息 -->
+						<tr>
+							<td>教材信息</td>
+							<td>
+								<table class="addTable table table-responsive table-striped table-hover">
+									<tr>
+										<td>从该课的以前记录快速完成...</td>
+										<td>
+											<select id="search_result" class="form-control">
+												<option selected value="1">记录列表</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>教材名</td>
+										<td><input id="name" name="name" type="text"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>ISBN书号</td>
+										<td><input id="ISBN" name="ISBN" type="text"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>教材版别</td>
+										<td><input id="edition" name="edition" type="text"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>主编</td>
+										<td><input id="chief_editor" name="chief_editor"
+											type="text" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>出版单位</td>
+										<td><input id="institute" name="institute" type="text"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>出版时间</td>
+										<td><input id="pub_date" name="pub_date" type="text"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>作者</td>
+										<td><input id="author" name="author" type="text"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>价格</td>
+										<td><input id="price" name="price" type="text"
+											class="form-control"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						
+						<!-- Submit! -->
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">新增</button>
+							</td>
+						</tr>
+					
 					</table>
 				</form>
 			</div>
@@ -86,42 +143,44 @@
 						<th>ISBN书号</th>
 						<th>版别</th>
 						<th>主编</th>
+						<th>作者</th>
 						<th>出版单位</th>
 						<th>出版时间</th>
-						<th>获奖及规划情况</th>
-						<th>是否选修</th>
+						<th>价格</th>
+						<th>审核状态</th>
 						<th>编辑</th>
-						<th>删除</th>
 					</tr>
 				</thead>
 
+				<!-- th:each! -->
 				<tbody>
-					<c:forEach items="${list}" var="item">
-						<tr>
-							<!-- <td>${item.id}</td> -->
-							<td>X2016011</td>
-							<td>软件详细设计</td>
-							<td>ASDFGHJ23456</td>
-							<td>3</td>
-							<td>XXX, XXX</td>
-							<td>西安交大出版社</td>
-							<td>2019.4.1</td>
-							<td>无</td>
-							<td>否</td>
-							<td><a href="product_edit?id=${item.id}"> <span
-									class="glyphicon glyphicon-edit"></span>
-							</a></td>
-							<td><a href="product_delete?id=${item.id}"> <span
-									class="glyphicon glyphicon-trash"></span>
-							</a></td>
-						</tr>
-					</c:forEach>
+					<tr th:each="obj : ${objList}" th:object="${obj.book}">
+						<td th:text="|${obj.lesson.lessonDetail?.lessonCode} (学期${obj.lesson.lessonDetail?.semaster}, ${obj.lesson.name})|"></td>
+						<td th:text="*{bookDetail?.name}"></td>
+						<td th:text="*{bookDetail?.ISBN}"></td>
+						<td th:text="*{bookDetail?.edition}"></td>
+						<td th:text="*{bookDetail?.chiefEditor}"></td>
+						<td th:text="*{bookDetail?.author}"></td>
+						<td th:text="*{bookDetail?.institute}"></td>
+						<td th:text="*{bookDetail?.pubDate}"></td>
+						<td th:text="*{bookDetail?.price}"></td>
+						<td><font style="color: red;" th:text="*{status}"></font></td>
+						<td><a th:href="'/tch/edit/' + ${obj.id}">
+							<span class="glyphicon glyphicon-edit"></span>
+						</a></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
 	
 	</div>
 
-	<div th:include="tch/footer::footerBar"></div>
+	<div>
+		<footer class="footer" style="padding: 20px">
+			<div class="container text-center">
+				<p class="text-muted">Copyright 1996-2004 教师教材管理系统. All Rights Reserved</p>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>

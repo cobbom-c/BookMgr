@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import top.ourck.beans.*;
 import top.ourck.dao.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -38,11 +39,11 @@ public class StudentBookService {
     public List<UseBook> getUseBookByStudentId(int id)
     {
         Student stu = sDao.select(id);
-        StudentDetail stud = sdDao.select(stu.getId());
+        StudentDetail stud = stu.getStudentDetail();
         List<Attend> att = aDao.selectByCid(stud.getClazz().getId());
-        List<UseBook> ub = null;
+        List<UseBook> ub = new LinkedList<UseBook>();
         for(Attend attend:att) {
-            ub.add(ubService.getUseBookByLid(attend.getLesson().getId()));
+        	ub.addAll(ubService.getUseBookByLid(attend.getLesson().getId()));
         }
         return ub;
     }
