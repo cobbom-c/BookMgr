@@ -28,7 +28,7 @@ public class BookOrderService {
     {
         BookOrder bo = boDao.selectByUidBid(uid, bid);
         if(bo == null)
-            return 1;
+            return 0;
         else
             return bo.getNum();
     }

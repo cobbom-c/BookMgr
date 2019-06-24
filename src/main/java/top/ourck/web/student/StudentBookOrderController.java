@@ -65,8 +65,11 @@ public class StudentBookOrderController {
         if(user.getType().equals(UserType.STUDENT))
         {
             List<UseBook> usebook = studentbookservice.getUseBookByStudentId(user.getId());
-            for(UseBook ub:usebook)
+            for(UseBook ub : usebook)
             {
+            	if(!ub.getBook().getStatus().equals("审核通过"))
+            		continue; // HINT 没通过审核的书不能给人选！
+            	
                 Map<String ,String> pam = new HashMap<String, String>();
                 pam.put("lesson_code" , ub.getLesson().getLessonDetail().getLessonCode());
                 pam.put("lesson_name" , ub.getLesson().getName());
@@ -99,6 +102,6 @@ public class StudentBookOrderController {
         	bookorderservice.updateBookNum(Integer.parseInt(uid), Integer.parseInt(bid), Integer.parseInt(num));
         }
         
-        return "redirect:/stu/bookorder";
+        return "stu/success";
     }
 }
