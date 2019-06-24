@@ -1,0 +1,84 @@
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="tch/header::head"></head>
+
+<body>
+	<div th:include="tch/header::headerBar"></div>
+
+	<div class="container">
+
+		<div class="panel panel-warning addDiv" style="“width: 550px;">
+			<div class="panel-heading" th:text="|编辑课程用书信息|"></div>
+			<div class="panel-body">
+				<form method="post" id="addForm" action="../update">
+					<table class="addTable table table-responsive table-striped table-hover">
+						<tr>
+							<td>
+								审核状态
+								<input id="usebook_id" name="usebook_id" type="hidden" class="form-control"
+									th:value="${obj.id}">
+							</td>
+							<td><font style="color: red;" th:text="${obj.book.status}"></font></td>
+						</tr>
+						<tr>
+							<td>详细信息</td>
+							<td th:object="${obj.book.bookDetail}">
+								<table class="addTable table table-responsive table-striped table-hover">
+									<tr>
+										<td>教材名</td>
+										<td><input id="name" name="name" type="text" class="form-control"
+												th:value="*{name}"></td>
+									</tr>
+									<tr>
+										<td>教材书号（ISBN）</td>
+										<td><input id="ISBN" name="ISBN" type="text" class="form-control"
+												th:value="*{ISBN}"></td>
+									</tr>
+									<tr>
+										<td>教材版别</td>
+										<td><input id="edition" name="edition" type="text" class="form-control"
+												th:value="*{edition}"></td>
+									</tr>
+									<tr>
+										<td>主编</td>
+										<td><input id="chief_editor" name="chief_editor" class="form-control"
+												th:value="*{chiefEditor}"></td>
+									</tr>
+									<tr>
+										<td>出版单位</td>
+										<td><input id="institute" name="institute" type="text" class="form-control"
+												th:value="*{institute}"></td>
+									</tr>
+									<tr>
+										<td>出版时间</td>
+										<td><input id="pub_date" name="pub_date" type="text" class="form-control"
+												th:value="*{pubDate}"></td>
+									</tr>
+									<tr>
+										<td>作者</td>
+										<td><input id="author" name="author" type="text" class="form-control"
+												th:value="*{author}"></td>
+									</tr>
+									<tr>
+										<td>价格</td>
+										<td><input id="price" name="price" type="text" class="form-control"
+												th:value="*{price}"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+	
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">提交修改</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<div th:include="tch/footer::footerBar"></div>
+</body>
+</html>

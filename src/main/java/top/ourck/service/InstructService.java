@@ -18,6 +18,10 @@ public class InstructService {
 		return iDao.list(0, 1000);
 	}
 	
+	public List<Instruct> listInstructByTid(int tid) {
+		return iDao.listByTid(tid, 0, 1000);
+	}
+	
 	public void addInstruct(Instruct instruct) {
 		iDao.add(instruct);
 	}

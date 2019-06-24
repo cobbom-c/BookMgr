@@ -22,6 +22,11 @@ public class LessonDetail {
 	private Integer totalHours;
 	private Integer score;
 	private String semaster;
+	
+	public LessonDetail() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public LessonDetail(Integer id, String lessonCode, String type, String education, String pos, String language,
 			Integer maxStunum, Integer stunum, Integer beginWeek, Integer endWeek, Integer totalWeek,
 			Integer hoursWeekly, Integer practiceWeek, Integer totalHours, Integer score, String semaster) {
@@ -43,9 +48,7 @@ public class LessonDetail {
 		this.score = score;
 		this.semaster = semaster;
 	}
-	public LessonDetail() {
 
-	}
 	public Integer getId() {
 		return id;
 	}
@@ -136,15 +139,12 @@ public class LessonDetail {
 	public void setScore(Integer score) {
 		this.score = score;
 	}
+
 	public String getSemaster() {
 		return semaster;
 	}
+
 	public void setSemaster(String semaster) {
 		this.semaster = semaster;
 	}
-	
-	
-	
-	
-
 }

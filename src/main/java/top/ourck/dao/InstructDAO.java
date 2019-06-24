@@ -30,6 +30,9 @@ public interface InstructDAO extends SimpleDAO<Instruct> {
 	String DELETE_SQL = "DELETE FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String SELECT_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "WHERE id = #{id}";
 	String LIST_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME + "LIMIT #{start}, #{offset}";
+	String LIST_BY_TID_SQL = "SELECT" + SELECT_FIELDS + "FROM" + TABLE_NAME
+			+ "WHERE tid = #{tid} "
+			+ "LIMIT #{start}, #{offset}";
 	
 	@Insert(ADD_SQL)
 	@Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
@@ -59,4 +62,15 @@ public interface InstructDAO extends SimpleDAO<Instruct> {
 	})
 	List<Instruct> list(@Param("start") int start,
 						@Param("offset") int offset);
+	
+	@Select(LIST_BY_TID_SQL)
+	@Results({
+		@Result(column = "tid", property = "teacher",
+				one = @One(select = "top.ourck.dao.TeacherDAO.select")),
+		@Result(column = "lid", property = "lesson",
+		one = @One(select = "top.ourck.dao.LessonDAO.select"))
+	})
+	List<Instruct> listByTid(@Param("tid") int tid,
+							@Param("start") int start,
+							@Param("offset") int offset);
 }
