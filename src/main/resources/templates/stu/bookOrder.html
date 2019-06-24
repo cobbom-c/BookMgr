@@ -46,8 +46,7 @@
 										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
 											<font face="微软雅黑" style="FONT-SIZE: 15pt">填表人:</font>
 										</div></td>
-									<td
-										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
+									<td style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
 											<div class="infoplus_labelControlContainer inline">
 												<input type="hidden" value="2016900667">
 												<div style="WIDTH: 100%" title=""
@@ -56,20 +55,18 @@
 												</div>
 											</div>
 										</div></td>
-									<td
-										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
-											<font face="微软雅黑" style="FONT-SIZE: 15pt">填表时间:</font>
-										</div></td>
-									<td
-										style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
-											<div class="infoplus_labelControlContainer inline">
-												<input type="hidden" value="1544544000">
-												<div style="WIDTH: 100%" title=""
-													class="infoplus_control infoplus_labelControl inline">
-													<font face="微软雅黑" style="FONT-SIZE: 15pt" th:text="${date}"></font>
-												</div>
+									<td style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
+										<font face="微软雅黑" style="FONT-SIZE: 15pt">填表时间:</font>
+									</div></td>
+									<td style="BORDER-TOP: #000000 1pt; BORDER-RIGHT: #000000 1pt; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #000000 1pt; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #000000 1pt; PADDING-RIGHT: 5px"><div>
+										<div class="infoplus_labelControlContainer inline">
+											<input type="hidden" value="1544544000">
+											<div style="WIDTH: 100%" title=""
+												class="infoplus_control infoplus_labelControl inline">
+												<font face="微软雅黑" style="FONT-SIZE: 15pt" th:text="${date}"></font>
 											</div>
-										</div></td>
+										</div>
+									</div></td>
 								</tr>
 							</tbody>
 						</table>
@@ -101,8 +98,8 @@
 									<td><div align="center">
 											<div>
 												<input type="hidden" value="2016900667">
-												<div title="">
-													<font face="微软雅黑" th:text="${id}"></font>
+												<div>
+													<font face="微软雅黑" th:text="${stuno}"></font>
 												</div>
 											</div>
 										</div></td>
@@ -134,7 +131,7 @@
 											<font face="微软雅黑" size="4">班级</font>
 										</div>
 										<div align="center"></div></td>
-									<td th:text="${class}"><div align="center">
+									<td><div align="center">
 											<div>
 												<input type="hidden" value="2016240206">
 												<div title="" th:text="${class}"></div>
@@ -154,7 +151,7 @@
 								</tr>
 								<tr>
 									<td><div align="center">
-											<font face="Microsoft YaHei" size="4">学期</font>
+											<font face="Microsoft YaHei" size="4">年季</font>
 										</div></td>
 									<td colspan="5"><div align="center">
 											<div>
@@ -168,11 +165,12 @@
 								</tr>
 								<tr>
 									<td colspan="6"><div align="center" name="groupGMJCList">
-											<input type="hidden" name="fieldGroupGMJCListCount444189"
-												value="0">
+												
+												
 												
 											<!-- Form begins here! -->
-											<form method="post" action="#">	
+											<form method="post" action="bookorder">	
+												<input id="uid" name="uid" th:value="${id}" class="form-control" type="hidden"></input>
 												<table widgetindex="0" border="1" class="addTable table table-responsive table-striped table-hover">
 													<colgroup>
 														<col width="112">
@@ -193,7 +191,7 @@
 															<th><font size="3">作者</font></th>
 															<th><font size="3">出版社</font></th>
 															<th><font size="3">数量</font></th>
-															<th><font face="Microsoft YaHei" size="3">意见</font></th>
+															<th><font size="3">单价</font></th>
 														</tr>
 													</thead>
 													<tbody th:each="info : ${bookinfo}">
@@ -204,8 +202,10 @@
 															<td th:text="${info['book_code']}"></td>
 															<td th:text="${info['book_author']}"></td>
 															<td th:text="${info['book_publisher']}"></td>
-															<td><input th:id="${info['book_code']}" th:value="${info['book_num']}" class="form-control"></input></td>
-															<td><input th:id="uid" th:value="${id}" class="form-control" type="hidden"></input></td>
+															<td>
+																<input th:id="${info['book_id']}" th:name="${info['book_id']}" th:value="${info['book_num']}" class="form-control"></input>
+															</td>
+															<td><font style="color: red;" th:text="${info['book_price']}"></font></td>
 														</tr>
 													</tbody>
 												</table>
@@ -213,10 +213,11 @@
 											</form>
 									
 											
-									</div></td>
+										</div></td>
 								</tr>
 							</tbody>
 						</table>
+
 					</div>
 				</td>
 			</tr>

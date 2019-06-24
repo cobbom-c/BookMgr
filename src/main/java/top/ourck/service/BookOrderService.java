@@ -28,7 +28,7 @@ public class BookOrderService {
     {
         BookOrder bo = boDao.selectByUidBid(uid, bid);
         if(bo == null)
-            return 1;
+            return 0;
         else
             return bo.getNum();
     }
@@ -37,12 +37,20 @@ public class BookOrderService {
     {
     	Book bk = bDao.select(bid);
     	Student stu = sDao.select(uid);
-    	BookOrder bo = new BookOrder();
-    	bo.setBook(bk);
-    	if(boDao.selectByUidBid(uid, bid) != null)
+    	BookOrder bo = boDao.selectByUidBid(uid, bid);
+    	if(bo != null) {
+    		bo.setBook(bk);
+    		bo.setStudent(stu);
+    		bo.setNum(num);
     		updateBookOrder(bo);
-    	else
+    	}
+    	else {
+    		bo = new BookOrder();
+    		bo.setBook(bk);
+    		bo.setStudent(stu);
+    		bo.setNum(num);
     		addBookOrder(bo);
+    	}
     }
     
     public List<BookOrder> list() {

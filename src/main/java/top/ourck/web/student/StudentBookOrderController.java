@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import top.ourck.beans.Student;
 import top.ourck.beans.UseBook;
 import top.ourck.beans.UserType;
 import top.ourck.beans.util.User;
@@ -17,15 +19,19 @@ import top.ourck.service.StudentService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/stu")
 public class StudentBookOrderController {
+	
     @Autowired
     private StudentBookService studentbookservice;
 
@@ -41,52 +47,62 @@ public class StudentBookOrderController {
     @GetMapping("/bookorder")
     public String showOrder(Model model)
     {
-        List<Map<String, Object>> bookinfo = new ArrayList<Map<String,Object>>();
+        List<Map<String, String>> bookinfo = new LinkedList<Map<String,String>>();
         User user = userholder.getUser();
 
         //处理学生信息
-        model.addAttribute("name", studentservice.getById(user.getId()).getStudentDetail().getName());
-        model.addAttribute("id", user.getUserName());
-        model.addAttribute("major", studentservice.getById(user.getId()).getStudentDetail().getClazz().getMajor().getName());
-        model.addAttribute("grade", studentservice.getById(user.getId()).getStudentDetail().getClazz().getGrade());
-        model.addAttribute("class", studentservice.getById(user.getId()).getStudentDetail().getClazz().getName());
-        model.addAttribute("phone", studentservice.getById(user.getId()).getStudentDetail().getPhone());
+        Student stu = studentservice.getById(user.getId());
+        model.addAttribute("stuno", stu.getUserName());
+        model.addAttribute("academy", stu.getStudentDetail().getClazz().getMajor().getCollege());
+        model.addAttribute("date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        model.addAttribute("name", stu.getStudentDetail().getName());
+        model.addAttribute("id", user.getId());
+        model.addAttribute("major", stu.getStudentDetail().getClazz().getMajor().getName());
+        model.addAttribute("grade", stu.getStudentDetail().getClazz().getGrade());
+        model.addAttribute("class", stu.getStudentDetail().getClazz().getName());
+        model.addAttribute("phone", stu.getStudentDetail().getPhone());
+
         //处理教材信息
         if(user.getType().equals(UserType.STUDENT))
         {
             List<UseBook> usebook = studentbookservice.getUseBookByStudentId(user.getId());
-            model.addAttribute("semaster", usebook.get(1).getLesson().getLessonDetail().getSemaster());
-
-            for(UseBook ub:usebook)
+            for(UseBook ub : usebook)
             {
-                Map<String ,Object> pam = new HashMap<String,Object>();
-                pam.put("lessoncode" ,ub.getLesson().getLessonDetail().getLessonCode());
-                pam.put("lessonname" ,ub.getLesson().getName());
-                pam.put("bookname" ,ub.getBook().getBookDetail().getName());
-                pam.put("bookcode" ,ub.getBook().getBookDetail().getISBN());
-                pam.put("bookauthor" ,ub.getBook().getBookDetail().getAuthor());
-                pam.put("bookpublisher" ,ub.getBook().getBookDetail().getInstitute());
-                pam.put("num" ,bookorderservice.getNumByIdAndBid(user.getId(), ub.getBook().getId()));
+            	if(!ub.getBook().getStatus().equals("审核通过"))
+            		continue; // HINT 没通过审核的书不能给人选！
+            	
+                Map<String ,String> pam = new HashMap<String, String>();
+                pam.put("lesson_code" , ub.getLesson().getLessonDetail().getLessonCode());
+                pam.put("lesson_name" , ub.getLesson().getName());
+                pam.put("book_id" , "" + ub.getBook().getId());
+                pam.put("book_name" , ub.getBook().getBookDetail().getName());
+                pam.put("book_code" , ub.getBook().getBookDetail().getISBN());
+                pam.put("book_author" , ub.getBook().getBookDetail().getAuthor());
+                pam.put("book_publisher" , ub.getBook().getBookDetail().getInstitute());
+                pam.put("book_num" , "" + bookorderservice.getNumByIdAndBid(user.getId(), ub.getBook().getId()));
+                pam.put("book_price" , "" + ub.getBook().getBookDetail().getPrice());
                 bookinfo.add(pam);
             }
         }
-
         model.addAttribute("bookinfo", bookinfo);
-        return "book/Order";
+        return "stu/bookOrder";
     }
 
-    @PostMapping("/bookOrder")
+    @PostMapping("/bookorder")
     public String recordOrder(HttpServletRequest req, HttpServletResponse resp)
     {
+    	String uid = req.getParameter("uid");
         Enumeration<String> acceptedBid = req.getParameterNames();
-        String uid = req.getParameter("uid");
         while(acceptedBid.hasMoreElements())
         {
-        	String bid = acceptedBid.nextElement();
+        	String key = acceptedBid.nextElement();
+        	if(key.equals("uid"))
+        		continue; // 上面已经获取过了。因此遍历遇到这个参数应该跳过。
+        	String bid = key;
         	String num = req.getParameter(bid);
         	bookorderservice.updateBookNum(Integer.parseInt(uid), Integer.parseInt(bid), Integer.parseInt(num));
         }
         
-        return "/stu/index";
+        return "stu/success";
     }
 }

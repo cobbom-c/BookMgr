@@ -35,14 +35,13 @@ public class StudentBookService {
     @Autowired
     private UseBookService ubService;
 
-
     public List<UseBook> getUseBookByStudentId(int id)
     {
         Student stu = sDao.select(id);
         StudentDetail stud = stu.getStudentDetail();
         List<Attend> att = aDao.selectByCid(stud.getClazz().getId());
         List<UseBook> ub = new LinkedList<UseBook>();
-        for(Attend attend:att) {
+        for(Attend attend : att) {
         	ub.addAll(ubService.getUseBookByLid(attend.getLesson().getId()));
         }
         return ub;
