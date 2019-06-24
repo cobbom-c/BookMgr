@@ -42,7 +42,7 @@ public class StudentBookOrderController {
         User user = userholder.getUser();
 
         //处理学生信息
-        model.addAttribute("stuname", studentservice.getById(user.getId()).getStudentDetail().getName());
+        model.addAttribute("name", studentservice.getById(user.getId()).getStudentDetail().getName());
         model.addAttribute("id", user.getUserName());
         model.addAttribute("major", studentservice.getById(user.getId()).getStudentDetail().getClazz().getMajor().getName());
         model.addAttribute("grade", studentservice.getById(user.getId()).getStudentDetail().getClazz().getGrade());
@@ -75,11 +75,13 @@ public class StudentBookOrderController {
     @PostMapping("/bookOrder")
     public String recordOrder(HttpServletRequest req, HttpServletResponse resp)
     {
-        Enumeration<String> acceptedUid = req.getParameterNames();
-        while(acceptedUid.hasMoreElements())
+        Enumeration<String> acceptedBid = req.getParameterNames();
+        String uid = req.getParameter("uid");
+        while(acceptedBid.hasMoreElements())
         {
-        	String uid = acceptedUid.nextElement();
-        	
+        	String bid = acceptedBid.nextElement();
+        	String num = req.getParameter(bid);
+        	bookorderservice.updateBookNum(Integer.parseInt(uid), Integer.parseInt(bid), Integer.parseInt(num));
         }
         
         return "/stu/index";

@@ -204,8 +204,8 @@
 															<td th:text="${info['book_code']}"></td>
 															<td th:text="${info['book_author']}"></td>
 															<td th:text="${info['book_publisher']}"></td>
-															<td><input th:value="${info['book_num']}" class="form-control"></input></td>
-															<td></td>
+															<td><input th:id="${info['book_code']}" th:value="${info['book_num']}" class="form-control"></input></td>
+															<td><input th:id="uid" th:value="${id}" class="form-control" type="hidden"></input></td>
 														</tr>
 													</tbody>
 												</table>
