@@ -206,8 +206,9 @@ var book;
 				lesson = data;
 				var objSelect = document.getElementById("search_result_lesson"); 
 				for(var num in data){
-					jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
+					jsAddItemToSelect(objSelect, data[num].semaster+' '+data[num].name, data[num].id)
 				}
+				 changeLesson();				
 			}
 		});
 	}
@@ -225,6 +226,7 @@ var book;
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
 				}
+				 changeBook();	
 			}
 		});
 	}
@@ -235,8 +237,7 @@ var book;
 		objSelect.options.add(Item); 
 	} 
 	 
-	//lesson下拉框响应
-	$("#search_result_lesson").change(function(){
+	function changeLesson(){
 		var obj = document.getElementById('search_result_lesson');
 		var index = obj.selectedIndex - 1;
 	     //更改3框，显示课程信息
@@ -245,20 +246,32 @@ var book;
 	     $("#lesson_time").val(lesson[index].hours);
 	     //ajax获取书本信息
 	     searchBook();
-	    });
+	   
+	}
+	
+	
+	function changeBook(){
+		 //更改显示书本信息
+		var obj = document.getElementById('search_result_book');
+		var index = obj.selectedIndex;
+		 
+		 $("#name").val(book[index].name);
+		 $("#ISBN").val(book[index].isbn);
+		 $("#edition").val(book[index].edition);
+		 $("#chief_editor").val(book[index].chief_editor);
+		 $("#publisher").val(book[index].publisher);
+		 $("#pub_date").val(book[index].pub_date);
+		 $("#author").val(book[index].author);
+		 $("#price").val(book[index].price);
+	    
+	}
+	
+	//lesson下拉框响应
+	$("#search_result_lesson").change(changeLesson());
 	
 	//book下拉框响应
-	$("#search_result_book").change(function(){
-	     //更改显示书本信息
-		 $("#name").val(book[$("#search_result_book").val()].name);
-		 $("#ISBN").val(book[$("#search_result_book").val()].isbn);
-		 $("#edition").val(book[$("#search_result_book").val()].edition);
-		 $("#chief_editor").val(book[$("#search_result_book").val()].chief_editor);
-		 $("#publisher").val(book[$("#search_result_book").val()].publisher);
-		 $("#pub_date").val(book[$("#search_result_book").val()].pub_date);
-		 $("#author").val(book[$("#search_result_book").val()].author);
-		 $("#price").val(book[$("#search_result_book").val()].price);
-	    });
+	$("#search_result_book").change(changeBook());
+
 	
 </script>
 	
