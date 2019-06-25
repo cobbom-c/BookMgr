@@ -217,6 +217,7 @@ var book;
 	
 	<!--书本搜索 -->
 	function searchBook(){
+		
 		$.ajax({
 			url:"http://localhost:8080/search/usebook",
 			type:'post',
@@ -240,7 +241,7 @@ var book;
 	} 
 	
 	function jsCleanSelect(objSelect){
-		objSelect.val() = "";
+		objSelect.innerHTML = "";
 	}
 
 	 
