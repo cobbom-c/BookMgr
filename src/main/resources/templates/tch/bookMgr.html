@@ -262,7 +262,8 @@ var book;
 	
 	function changeBook(){
 		 //更改显示书本信息
-		 var index = $("#search_result_book").val();
+		var obj = document.getElementById('search_result_book');
+		var index = obj.selectedIndex;
 		 
 		 $("#name").val(book[index].name);
 		 $("#ISBN").val(book[index].isbn);
@@ -280,6 +281,7 @@ var book;
 	
 	//book下拉框响应
 	$("#search_result_book").change(changeBook());
+
 	
 </script>
 </body>

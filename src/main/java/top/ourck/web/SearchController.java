@@ -39,14 +39,14 @@ public class SearchController {
 			jobj.put("name", l.getName());
 			jobj.put("code", l.getLessonDetail().getLessonCode());
 			jobj.put("hours", l.getLessonDetail().getTotalHours());	
-				//need a semaster
+			jobj.put("semaster", l.getLessonDetail().getSemaster());
 			jary.put(jobj);
 		}
 		
 		return jary.toString();
 	}
 	
-	@RequestMapping("/usebook")
+	@RequestMapping(value = "/usebook", produces = {"application/json"})
 	public String usebookSearch(@RequestParam("lid") Integer lid) {
 		List<UseBook> list = ubDao.listByLid(lid);
 		JSONArray jary = new JSONArray();
@@ -59,7 +59,7 @@ public class SearchController {
 			jobj.put("chief_editor", ub.getBook().getBookDetail().getChiefEditor());
 			jobj.put("publisher", ub.getBook().getBookDetail().getInstitute());
 			jobj.put("pub_date", ub.getBook().getBookDetail().getPubDate());
-				//need a author
+			jobj.put("author", ub.getBook().getBookDetail().getAuthor());
 			jobj.put("price", ub.getBook().getBookDetail().getPrice());
 			jary.put(jobj);
 		}
