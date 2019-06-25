@@ -74,7 +74,7 @@ public class TeacherController {
 						@RequestParam("ISBN") String isbn,
 						@RequestParam("edition") String edition,
 						@RequestParam("chief_editor") String chiefEditor,
-						@RequestParam("institute") String institute,
+						@RequestParam("publisher") String institute,
 						@RequestParam("pub_date") String pubDate,
 						@RequestParam("author") String author,
 						@RequestParam("price") String priceStr) {
