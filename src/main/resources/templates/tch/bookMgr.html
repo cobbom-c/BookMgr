@@ -94,7 +94,7 @@ var book;
 		<div class="panel panel-warning addDiv" style="“width: 550px;">
 			<div class="panel-heading">新增教材</div>
 			<div class="panel-body">
-				<form method="post" id="addForm" action="add">
+				
 					<table class="addTable table table-responsive table-striped table-hover">
 						
 						<!-- 分两栏来录入课本信息，第一栏为课程... -->
@@ -139,7 +139,8 @@ var book;
 						<!-- 第二栏为书本信息 -->
 						<tr>
 							<td>教材信息</td>
-							<td>
+							<td><div>
+								<form method="post" id="addForm" action="add">
 								<table class="addTable table table-responsive table-striped table-hover">
 									<tr>
 										<td>从该课的以前记录快速完成...</td>
@@ -190,7 +191,8 @@ var book;
 											class="form-control"></td>
 									</tr>
 								</table>
-							</td>
+								</form>
+							</div></td>
 						</tr>
 						
 						<!-- Submit! -->
@@ -199,9 +201,7 @@ var book;
 								<button type="submit" class="btn btn-success">新增</button>
 							</td>
 						</tr>
-					
-					</table>
-				</form>
+				</table>
 			</div>
 		</div>
 
