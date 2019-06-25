@@ -213,7 +213,7 @@ var book;
 	}
 	
 	<!--书本搜索 -->
-	function serachBook(){
+	function searchBook(){
 		$.ajax({
 			url:"http://localhost:8080:/search/usebook",
 			type:'post',
@@ -237,10 +237,12 @@ var book;
 	 
 	//lesson下拉框响应
 	$("#search_result_lesson").change(function(){
+		var obj = document.getElementById('search_result_lesson');
+		var index = obj.selectedIndex - 1;
 	     //更改3框，显示课程信息
-	     $(".lesson_id").val() = lesson[$("#search_result_lesson").val()].code;
-	     $(".lesson_msg").val() = lesson[$("#search_result_lesson").val()].name;
-	     $(".lesson_time").val() = lesson[$("#search_result_lesson").val()].hours;
+	     $("#lesson_id").val(lesson[index].code);
+	     $("#lesson_name").val(lesson[index].name);
+	     $("#lesson_time").val(lesson[index].hours);
 	     //ajax获取书本信息
 	     searchBook();
 	    });
