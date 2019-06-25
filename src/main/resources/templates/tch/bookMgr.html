@@ -276,11 +276,16 @@ var book;
 	    
 	}
 	
+	
 	//lesson下拉框响应
-	$("#search_result_lesson").change(changeLesson());
+	$("#search_result_lesson").change(function (){
+		changeLesson();
+	});
 	
 	//book下拉框响应
-	$("#search_result_book").change(changeBook());
+	$("#search_result_book").change(function(){
+		changeBook();
+	});
 
 	
 </script>
