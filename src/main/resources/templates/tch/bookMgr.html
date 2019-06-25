@@ -190,16 +190,14 @@
 		</footer>
 	</div>
 	
-
-
-<!-- jQuery latest version -->
-<script src="../js/jquery-3.1.1.min.js"></script>
+	
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
 <script>
-
 var lesson;
 var book;
 	<!--课程搜索 -->
-	function find_lesson(){
+	function foo(){
 		$.ajax({
 			url:"http://localhost:8080/search/lesson",
 			type:'post',
@@ -208,7 +206,6 @@ var book;
 				<!-- 添加课程下拉框 -->
 				lesson = data;
 				var objSelect = document.getElementById("search_result_lesson"); 
-				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].semaster+' '+data[num].name, data[num].id)
 				}
@@ -219,16 +216,14 @@ var book;
 	
 	<!--书本搜索 -->
 	function searchBook(){
-		
 		$.ajax({
-			url:"http://localhost:8080/search/usebook",
+			url:"http://localhost:8080:/search/usebook",
 			type:'post',
 			data:"lid=" + document.getElementById("search_result_lesson").value,
 			success:function(data){
 				book = data;
 				<!-- 添加书本下拉框 -->
 				var objSelect = document.getElementById("search_result_book"); 
-				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
 				}
@@ -242,11 +237,6 @@ var book;
 		var Item = new Option(objItemText,objItemValue);
 		objSelect.options.add(Item); 
 	} 
-	
-	function jsCleanSelect(objSelect){
-		objSelect.innerHTML = "";
-	}
-
 	 
 	function changeLesson(){
 		var obj = document.getElementById('search_result_lesson');
@@ -302,5 +292,6 @@ var book;
 
 	
 </script>
+	
 </body>
 </html>
