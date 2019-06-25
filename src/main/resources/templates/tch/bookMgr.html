@@ -238,9 +238,9 @@ var book;
 	//lesson下拉框响应
 	$("#search_result_lesson").change(function(){
 	     //更改3框，显示课程信息
-	     $(".lesson_id").val() = lesson[$("#search_result_lesson").val()].code;
-	     $(".lesson_msg").val() = lesson[$("#search_result_lesson").val()].name;
-	     $(".lesson_time").val() = lesson[$("#search_result_lesson").val()].hours;
+	     $("#lesson_id").val() = lesson[$("#search_result_lesson").val()].code;
+	     $("#lesson_msg").val() = lesson[$("#search_result_lesson").val()].name;
+	     $("#lesson_time").val() = lesson[$("#search_result_lesson").val()].hours;
 	     //ajax获取书本信息
 	     searchBook();
 	    });
