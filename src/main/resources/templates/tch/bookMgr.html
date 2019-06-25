@@ -6,7 +6,6 @@
 </head>
 
 <body>
-
 	<div>
 		<nav class="navbar navbar-default container-fluid" role="navigation">
 			<div class="navbar-header">
@@ -208,6 +207,7 @@ var book;
 				<!-- 添加课程下拉框 -->
 				lesson = data;
 				var objSelect = document.getElementById("search_result_lesson"); 
+				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
 				}
@@ -225,6 +225,7 @@ var book;
 				book = data;
 				<!-- 添加书本下拉框 -->
 				var objSelect = document.getElementById("search_result_book"); 
+				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
 				}
@@ -237,6 +238,10 @@ var book;
 		var Item = new Option(objItemText,objItemValue);
 		objSelect.options.add(Item); 
 	} 
+	
+	function jsCleanSelect(objSelect){
+		objSelect.val() = "";
+	}
 
 	 
 	//lesson下拉框响应
