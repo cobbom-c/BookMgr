@@ -39,7 +39,7 @@
 										<div class="row" style="margin: 5px;">
 											<div class="form-group">
 												<input id="search_bar" name = "search_bar" type="text" style="width: 90%">
-												<button onclick="foo()" class="btn btn-warning" style="margin: 5px;">搜索</button>
+												<button onclick=find_lesson() class="btn btn-warning" style="margin: 5px;">搜索</button>
 											</div>
 										</div>
 										<div class="row" style="margin: 5px;">
@@ -189,14 +189,16 @@
 		</footer>
 	</div>
 	
-	
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-	
+
+
+<!-- jQuery latest version -->
+<script src="../js/jquery-3.1.1.min.js"></script>
 <script>
+
 var lesson;
 var book;
 	<!--课程搜索 -->
-	function foo(){
+	function find_lesson(){
 		$.ajax({
 			url:"http://localhost:8080/search/lesson",
 			type:'post',
@@ -205,6 +207,7 @@ var book;
 				<!-- 添加课程下拉框 -->
 				lesson = data;
 				var objSelect = document.getElementById("search_result_lesson"); 
+				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
 				}
@@ -214,14 +217,16 @@ var book;
 	
 	<!--书本搜索 -->
 	function searchBook(){
+		
 		$.ajax({
-			url:"http://localhost:8080:/search/usebook",
+			url:"http://localhost:8080/search/usebook",
 			type:'post',
 			data:"lid=" + document.getElementById("search_result_lesson").value,
 			success:function(data){
 				book = data;
 				<!-- 添加书本下拉框 -->
 				var objSelect = document.getElementById("search_result_book"); 
+				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
 				}
@@ -234,6 +239,11 @@ var book;
 		var Item = new Option(objItemText,objItemValue);
 		objSelect.options.add(Item); 
 	} 
+	
+	function jsCleanSelect(objSelect){
+		objSelect.innerHTML = "";
+	}
+
 	 
 	//lesson下拉框响应
 	$("#search_result_lesson").change(function(){
@@ -261,6 +271,5 @@ var book;
 	    });
 	
 </script>
-	
 </body>
 </html>
