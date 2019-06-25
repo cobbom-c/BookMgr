@@ -29,7 +29,7 @@ public class SearchController {
 	@Autowired
 	private UseBookDAO ubDao;
 	
-	@RequestMapping("/lesson")
+	@RequestMapping(value = "/lesson", produces = {"application/json"})
 	public String lessonSearch(@RequestParam("keyword") String keyword) {
 		List<Lesson> list = lDao.search(keyword);
 		JSONArray jary = new JSONArray();
@@ -42,6 +42,7 @@ public class SearchController {
 				//need a semaster
 			jary.put(jobj);
 		}
+		
 		return jary.toString();
 	}
 	

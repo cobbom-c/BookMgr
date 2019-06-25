@@ -6,73 +6,6 @@
 </head>
 
 <body>
-<script>
-var lesson;
-var book;
-	<!--课程搜索 -->
-	function foo(){
-		$.ajax({
-			url:"http://localhost:8080:/search/lesson",
-			type:'post',
-			data:"keyword=" + document.getElementById("search_bar").value,
-			success:function(data){
-				<!-- 添加课程下拉框 -->
-				lesson = data;
-				var objSelect = document.getElementById("search_result_lesson"); 
-				for(var num in data){
-					function jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
-				}
-			}
-		});
-	}
-	
-	<!--书本搜索 -->
-	funciton serachBook(){
-		$.ajax({
-			url:"http://localhost:8080:/search/usebook",
-			type:'post',
-			data:"lid=" + document.getElementById("search_result_lesson").value,
-			success:function(data){
-				book = data;
-				<!-- 添加书本下拉框 -->
-				var objSelect = document.getElementById("search_result_book"); 
-				for(var num in data){
-					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
-				}
-			}
-		});
-	}
-	
-	// 向select选项中 加入一个Item 
-	function jsAddItemToSelect(objSelect, objItemText, objItemValue) { 
-		var Item = new Option(objItemText,objItemValue);
-		objSelect.options.add(varItem); 
-	} 
-	 
-	//lesson下拉框响应
-	$("#search_result_lesson").change(function(){
-	     //更改3框，显示课程信息
-	     $(".lesson_id").val() = lesson[$("#search_result_lesson").val()].code;
-	     $(".lesson_msg").val() = lesson[$("#search_result_lesson").val()].name;
-	     $(".lesson_time").val() = lesson[$("#search_result_lesson").val()].hours;
-	     //ajax获取书本信息
-	     searchBook();
-	    });
-	
-	//book下拉框响应
-	$("#search_result_book").change(function(){
-	     //更改显示书本信息
-		 $(".name").val() = book[$("#search_result_book").val()].name;
-		 $(".ISBN").val() = book[$("#search_result_book").val()].isbn;
-		 $(".edition").val() = book[$("#search_result_book").val()].edition;
-		 $(".chief_editor").val() = book[$("#search_result_book").val()].chief_editor;
-		 $(".publisher").val() = book[$("#search_result_book").val()]..publisher;
-		 $(".pub_date").val() = book[$("#search_result_book").val()].pub_date;
-		 $(".author").val() = book[$("#search_result_book").val()].author;
-		 $(".price").val() = book[$("#search_result_book").val()].price;
-	    });
-	
-</script>
 	<div>
 		<nav class="navbar navbar-default container-fluid" role="navigation">
 			<div class="navbar-header">
@@ -255,5 +188,77 @@ var book;
 			</div>
 		</footer>
 	</div>
+	
+	
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
+<script>
+var lesson;
+var book;
+	<!--课程搜索 -->
+	function foo(){
+		$.ajax({
+			url:"http://localhost:8080/search/lesson",
+			type:'post',
+			data:"keyword=" + document.getElementById("search_bar").value,
+			success:function(data){
+				<!-- 添加课程下拉框 -->
+				lesson = data;
+				var objSelect = document.getElementById("search_result_lesson"); 
+				for(var num in data){
+					jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
+				}
+			}
+		});
+	}
+	
+	<!--书本搜索 -->
+	function serachBook(){
+		$.ajax({
+			url:"http://localhost:8080:/search/usebook",
+			type:'post',
+			data:"lid=" + document.getElementById("search_result_lesson").value,
+			success:function(data){
+				book = data;
+				<!-- 添加书本下拉框 -->
+				var objSelect = document.getElementById("search_result_book"); 
+				for(var num in data){
+					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
+				}
+			}
+		});
+	}
+	
+	// 向select选项中 加入一个Item 
+	function jsAddItemToSelect(objSelect, objItemText, objItemValue) { 
+		var Item = new Option(objItemText,objItemValue);
+		objSelect.options.add(Item); 
+	} 
+	 
+	//lesson下拉框响应
+	$("#search_result_lesson").change(function(){
+	     //更改3框，显示课程信息
+	     $(".lesson_id").val() = lesson[$("#search_result_lesson").val()].code;
+	     $(".lesson_msg").val() = lesson[$("#search_result_lesson").val()].name;
+	     $(".lesson_time").val() = lesson[$("#search_result_lesson").val()].hours;
+	     //ajax获取书本信息
+	     searchBook();
+	    });
+	
+	//book下拉框响应
+	$("#search_result_book").change(function(){
+	     //更改显示书本信息
+		 $(".name").val() = book[$("#search_result_book").val()].name;
+		 $(".ISBN").val() = book[$("#search_result_book").val()].isbn;
+		 $(".edition").val() = book[$("#search_result_book").val()].edition;
+		 $(".chief_editor").val() = book[$("#search_result_book").val()].chief_editor;
+		 $(".publisher").val() = book[$("#search_result_book").val()].publisher;
+		 $(".pub_date").val() = book[$("#search_result_book").val()].pub_date;
+		 $(".author").val() = book[$("#search_result_book").val()].author;
+		 $(".price").val() = book[$("#search_result_book").val()].price;
+	    });
+	
+</script>
+	
 </body>
 </html>
