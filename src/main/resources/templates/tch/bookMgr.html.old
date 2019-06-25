@@ -27,7 +27,7 @@
 		<div class="panel panel-warning addDiv" style="“width: 550px;">
 			<div class="panel-heading">新增教材</div>
 			<div class="panel-body">
-				<form method="post" id="addForm" action="add">
+				
 					<table class="addTable table table-responsive table-striped table-hover">
 						
 						<!-- 分两栏来录入课本信息，第一栏为课程... -->
@@ -39,32 +39,31 @@
 										<div class="row" style="margin: 5px;">
 											<div class="form-group">
 												<input id="search_bar" name = "search_bar" type="text" style="width: 90%">
-												<button type="button" onclick="find_lesson()" class="btn btn-warning" style="margin: 5px;">搜索</button>
+												<button onclick=find_lesson() class="btn btn-warning" style="margin: 5px;">搜索</button>
 											</div>
 										</div>
 										<div class="row" style="margin: 5px;">
 											<select id="search_result_lesson" name = "search_result_lesson" class="form-control">
 												<option selected value="1">搜索结果</option>
 											</select>
-											<input id="lid" name="lid" type="hidden">
 										</div>
 									</td></tr>
 									<tr>
 										<td>课程编号</td>
 										<td><font style="color: red;">
-										<input id = "lesson_id" type = "text">
+										<input id = "lesson_id" name = "lesson_id" type = "text">
 										(这里查库后显示课程信息)</font></td>
 									</tr>
 									<tr>
 										<td>课程名称</td>
 										<td><font style="color: red;">
-										<input id = "lesson_name" type = "text">
+										<input id = "lesson_name" name = "lesson_name" type = "text">
 										(这里查库后显示课程信息)</font></td>
 									</tr>
 									<tr>
 										<td>课程学时</td>	
 										<td><font style="color: red;">									
-										<input id = "lesson_time" type = "text">
+										<input id = "lesson_time" name = "lesson_time" type = "text">
 										(这里查库后显示课程信息)</font></td>
 									</tr>
 								</table>
@@ -74,7 +73,7 @@
 						<tr>
 							<td>教材信息</td>
 							<td><div>
-
+								<form method="post" id="addForm" action="add">
 								<table class="addTable table table-responsive table-striped table-hover">
 									<tr>
 										<td>从该课的以前记录快速完成...</td>
@@ -125,6 +124,7 @@
 											class="form-control"></td>
 									</tr>
 								</table>
+								</form>
 							</div></td>
 						</tr>
 						
@@ -134,8 +134,7 @@
 								<button type="submit" class="btn btn-success">新增</button>
 							</td>
 						</tr>
-					</table>
-				</form>
+				</table>
 			</div>
 		</div>
 
@@ -190,14 +189,16 @@
 		</footer>
 	</div>
 	
-	
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-	
+
+
+<!-- jQuery latest version -->
+<script src="../js/jquery-3.1.1.min.js"></script>
 <script>
+
 var lesson;
 var book;
 	<!--课程搜索 -->
-	function foo(){
+	function find_lesson(){
 		$.ajax({
 			url:"http://localhost:8080/search/lesson",
 			type:'post',
@@ -206,28 +207,35 @@ var book;
 				<!-- 添加课程下拉框 -->
 				lesson = data;
 				var objSelect = document.getElementById("search_result_lesson"); 
+				jsCleanSelect(objSelect);
 				for(var num in data){
-					jsAddItemToSelect(objSelect, data[num].semaster+' '+data[num].name, data[num].id)
+					jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
 				}
-				 changeLesson();				
+				var obj = document.getElementById('search_result_lesson');
+				var index = obj.selectedIndex;
+			     //更改3框，显示课程信息
+			     $("#lesson_id").val(lesson[index].code);
+			     $("#lesson_name").val(lesson[index].name);
+			     $("#lesson_time").val(lesson[index].hours);
 			}
 		});
 	}
 	
 	<!--书本搜索 -->
 	function searchBook(){
+		
 		$.ajax({
-			url:"http://localhost:8080:/search/usebook",
+			url:"http://localhost:8080/search/usebook",
 			type:'post',
 			data:"lid=" + document.getElementById("search_result_lesson").value,
 			success:function(data){
 				book = data;
 				<!-- 添加书本下拉框 -->
 				var objSelect = document.getElementById("search_result_book"); 
+				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
 				}
-				changeBook();	
 			}
 		});
 	}
@@ -237,61 +245,37 @@ var book;
 		var Item = new Option(objItemText,objItemValue);
 		objSelect.options.add(Item); 
 	} 
+	
+	function jsCleanSelect(objSelect){
+		objSelect.innerHTML = "";
+	}
+
 	 
-	function changeLesson(){
+	//lesson下拉框响应
+	$("#search_result_lesson").change(function(){
 		var obj = document.getElementById('search_result_lesson');
 		var index = obj.selectedIndex;
-	     //更改4框，显示课程信息
-	     $("#lid").val(lesson[index].id);
+	     //更改3框，显示课程信息
 	     $("#lesson_id").val(lesson[index].code);
 	     $("#lesson_name").val(lesson[index].name);
 	     $("#lesson_time").val(lesson[index].hours);
 	     //ajax获取书本信息
 	     searchBook();
-	   
-	}
-	
-	
-	function changeBook(){
-		 //更改显示书本信息
-		var obj = document.getElementById('search_result_book');
-		var index = obj.selectedIndex;
-		 
-		 if(book.length != 0) {
-			 $("#name").val(book[index].name);
-			 $("#ISBN").val(book[index].isbn);
-			 $("#edition").val(book[index].edition);
-			 $("#chief_editor").val(book[index].chief_editor);
-			 $("#publisher").val(book[index].publisher);
-			 $("#pub_date").val(book[index].pub_date);
-			 $("#author").val(book[index].author);
-			 $("#price").val(book[index].price);
-		 }
-		 else {
-			 $("#name").val("");
-			 $("#ISBN").val("");
-			 $("#edition").val("");
-			 $("#chief_editor").val("");
-			 $("#publisher").val("");
-			 $("#pub_date").val("");
-			 $("#author").val("");
-			 $("#price").val("");
-		 }
-	}
-	
-	
-	//lesson下拉框响应
-	$("#search_result_lesson").change(function(){
-		changeLesson();
-	});
+	    });
 	
 	//book下拉框响应
 	$("#search_result_book").change(function(){
-		changeBook();
-	});
-
+	     //更改显示书本信息
+		 $("#name").val(book[$("#search_result_book").val()].name);
+		 $("#ISBN").val(book[$("#search_result_book").val()].isbn);
+		 $("#edition").val(book[$("#search_result_book").val()].edition);
+		 $("#chief_editor").val(book[$("#search_result_book").val()].chief_editor);
+		 $("#publisher").val(book[$("#search_result_book").val()].publisher);
+		 $("#pub_date").val(book[$("#search_result_book").val()].pub_date);
+		 $("#author").val(book[$("#search_result_book").val()].author);
+		 $("#price").val(book[$("#search_result_book").val()].price);
+	    });
 	
 </script>
-	
 </body>
 </html>

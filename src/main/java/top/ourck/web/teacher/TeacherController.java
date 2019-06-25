@@ -1,5 +1,7 @@
 package top.ourck.web.teacher;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,7 +61,8 @@ public class TeacherController {
 	public String bookMgr(Model model) {
 		User user = userHolder.getUser();
 		if(user != null && user.getType() == UserType.TEACHER) {
-			model.addAttribute("objList", ubService.listByTid(user.getId()));
+			List<UseBook> ubList = ubService.listByTid(user.getId());
+			model.addAttribute("objList", ubList);
 			return "tch/bookMgr";
 		}
 		else {
@@ -104,7 +107,7 @@ public class TeacherController {
 			ubService.addUseBook(ub);
 		}
 		
-		return "redirect:tch/bookmgr";
+		return "redirect:/tch/bookmgr";
 	}
 	
 	
