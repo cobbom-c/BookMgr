@@ -27,7 +27,7 @@
 		<div class="panel panel-warning addDiv" style="“width: 550px;">
 			<div class="panel-heading">新增教材</div>
 			<div class="panel-body">
-				
+				<form method="post" id="addForm" action="add">
 					<table class="addTable table table-responsive table-striped table-hover">
 						
 						<!-- 分两栏来录入课本信息，第一栏为课程... -->
@@ -39,31 +39,32 @@
 										<div class="row" style="margin: 5px;">
 											<div class="form-group">
 												<input id="search_bar" name = "search_bar" type="text" style="width: 90%">
-												<button onclick=find_lesson() class="btn btn-warning" style="margin: 5px;">搜索</button>
+												<button type="button" onclick="find_lesson()" class="btn btn-warning" style="margin: 5px;">搜索</button>
 											</div>
 										</div>
 										<div class="row" style="margin: 5px;">
 											<select id="search_result_lesson" name = "search_result_lesson" class="form-control">
 												<option selected value="1">搜索结果</option>
 											</select>
+											<input id="lid" name="lid" type="hidden">
 										</div>
 									</td></tr>
 									<tr>
 										<td>课程编号</td>
 										<td><font style="color: red;">
-										<input id = "lesson_id" name = "lesson_id" type = "text">
+										<input id = "lesson_id" type = "text">
 										(这里查库后显示课程信息)</font></td>
 									</tr>
 									<tr>
 										<td>课程名称</td>
 										<td><font style="color: red;">
-										<input id = "lesson_name" name = "lesson_name" type = "text">
+										<input id = "lesson_name" type = "text">
 										(这里查库后显示课程信息)</font></td>
 									</tr>
 									<tr>
 										<td>课程学时</td>	
 										<td><font style="color: red;">									
-										<input id = "lesson_time" name = "lesson_time" type = "text">
+										<input id = "lesson_time" type = "text">
 										(这里查库后显示课程信息)</font></td>
 									</tr>
 								</table>
@@ -73,7 +74,7 @@
 						<tr>
 							<td>教材信息</td>
 							<td><div>
-								<form method="post" id="addForm" action="add">
+
 								<table class="addTable table table-responsive table-striped table-hover">
 									<tr>
 										<td>从该课的以前记录快速完成...</td>
@@ -124,7 +125,6 @@
 											class="form-control"></td>
 									</tr>
 								</table>
-								</form>
 							</div></td>
 						</tr>
 						
@@ -134,7 +134,8 @@
 								<button type="submit" class="btn btn-success">新增</button>
 							</td>
 						</tr>
-				</table>
+					</table>
+				</form>
 			</div>
 		</div>
 
@@ -231,7 +232,7 @@ var book;
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
 				}
-				 changeBook();	
+				changeBook();	
 			}
 		});
 	}
@@ -250,7 +251,8 @@ var book;
 	function changeLesson(){
 		var obj = document.getElementById('search_result_lesson');
 		var index = obj.selectedIndex;
-	     //更改3框，显示课程信息
+	     //更改4框，显示课程信息
+	     $("#lid").val(lesson[index].id);
 	     $("#lesson_id").val(lesson[index].code);
 	     $("#lesson_name").val(lesson[index].name);
 	     $("#lesson_time").val(lesson[index].hours);
@@ -265,20 +267,31 @@ var book;
 		var obj = document.getElementById('search_result_book');
 		var index = obj.selectedIndex;
 		 
-		 $("#name").val(book[index].name);
-		 $("#ISBN").val(book[index].isbn);
-		 $("#edition").val(book[index].edition);
-		 $("#chief_editor").val(book[index].chief_editor);
-		 $("#publisher").val(book[index].publisher);
-		 $("#pub_date").val(book[index].pub_date);
-		 $("#author").val(book[index].author);
-		 $("#price").val(book[index].price);
-	    
+		 if(book.length != 0) {
+			 $("#name").val(book[index].name);
+			 $("#ISBN").val(book[index].isbn);
+			 $("#edition").val(book[index].edition);
+			 $("#chief_editor").val(book[index].chief_editor);
+			 $("#publisher").val(book[index].publisher);
+			 $("#pub_date").val(book[index].pub_date);
+			 $("#author").val(book[index].author);
+			 $("#price").val(book[index].price);
+		 }
+		 else {
+			 $("#name").val("");
+			 $("#ISBN").val("");
+			 $("#edition").val("");
+			 $("#chief_editor").val("");
+			 $("#publisher").val("");
+			 $("#pub_date").val("");
+			 $("#author").val("");
+			 $("#price").val("");
+		 }
 	}
 	
 	
 	//lesson下拉框响应
-	$("#search_result_lesson").change(function (){
+	$("#search_result_lesson").change(function(){
 		changeLesson();
 	});
 	
