@@ -211,6 +211,12 @@ var book;
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
 				}
+				var obj = document.getElementById('search_result_lesson');
+				var index = obj.selectedIndex;
+			     //更改3框，显示课程信息
+			     $("#lesson_id").val(lesson[index].code);
+			     $("#lesson_name").val(lesson[index].name);
+			     $("#lesson_time").val(lesson[index].hours);
 			}
 		});
 	}
@@ -260,14 +266,14 @@ var book;
 	//book下拉框响应
 	$("#search_result_book").change(function(){
 	     //更改显示书本信息
-		 $(".name").val() = book[$("#search_result_book").val()].name;
-		 $(".ISBN").val() = book[$("#search_result_book").val()].isbn;
-		 $(".edition").val() = book[$("#search_result_book").val()].edition;
-		 $(".chief_editor").val() = book[$("#search_result_book").val()].chief_editor;
-		 $(".publisher").val() = book[$("#search_result_book").val()].publisher;
-		 $(".pub_date").val() = book[$("#search_result_book").val()].pub_date;
-		 $(".author").val() = book[$("#search_result_book").val()].author;
-		 $(".price").val() = book[$("#search_result_book").val()].price;
+		 $("#name").val(book[$("#search_result_book").val()].name);
+		 $("#ISBN").val(book[$("#search_result_book").val()].isbn);
+		 $("#edition").val(book[$("#search_result_book").val()].edition);
+		 $("#chief_editor").val(book[$("#search_result_book").val()].chief_editor);
+		 $("#publisher").val(book[$("#search_result_book").val()].publisher);
+		 $("#pub_date").val(book[$("#search_result_book").val()].pub_date);
+		 $("#author").val(book[$("#search_result_book").val()].author);
+		 $("#price").val(book[$("#search_result_book").val()].price);
 	    });
 	
 </script>
