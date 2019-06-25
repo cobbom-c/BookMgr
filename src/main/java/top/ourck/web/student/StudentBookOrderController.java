@@ -100,7 +100,7 @@ public class StudentBookOrderController {
         		continue; // 上面已经获取过了。因此遍历遇到这个参数应该跳过。
         	String bid = key;
         	String num = req.getParameter(bid);
-        	if(Integer.parseInt(num)<0 || Double.parseDouble(num)%1 != 0)
+        	if(Double.parseDouble(num)<0 || Double.parseDouble(num)%1 != 0)
         	{
         		return "stu/failure";
         	}
