@@ -39,7 +39,7 @@
 										<div class="row" style="margin: 5px;">
 											<div class="form-group">
 												<input id="search_bar" name = "search_bar" type="text" style="width: 90%">
-												<button onclick=find_lesson() class="btn btn-warning" style="margin: 5px;">搜索</button>
+												<button onclick="foo()" class="btn btn-warning" style="margin: 5px;">搜索</button>
 											</div>
 										</div>
 										<div class="row" style="margin: 5px;">
@@ -189,16 +189,14 @@
 		</footer>
 	</div>
 	
-
-
-<!-- jQuery latest version -->
-<script src="../js/jquery-3.1.1.min.js"></script>
+	
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+	
 <script>
-
 var lesson;
 var book;
 	<!--课程搜索 -->
-	function find_lesson(){
+	function foo(){
 		$.ajax({
 			url:"http://localhost:8080/search/lesson",
 			type:'post',
@@ -207,32 +205,23 @@ var book;
 				<!-- 添加课程下拉框 -->
 				lesson = data;
 				var objSelect = document.getElementById("search_result_lesson"); 
-				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
 				}
-				var obj = document.getElementById('search_result_lesson');
-				var index = obj.selectedIndex;
-			     //更改3框，显示课程信息
-			     $("#lesson_id").val(lesson[index].code);
-			     $("#lesson_name").val(lesson[index].name);
-			     $("#lesson_time").val(lesson[index].hours);
 			}
 		});
 	}
 	
 	<!--书本搜索 -->
 	function searchBook(){
-		
 		$.ajax({
-			url:"http://localhost:8080/search/usebook",
+			url:"http://localhost:8080:/search/usebook",
 			type:'post',
 			data:"lid=" + document.getElementById("search_result_lesson").value,
 			success:function(data){
 				book = data;
 				<!-- 添加书本下拉框 -->
 				var objSelect = document.getElementById("search_result_book"); 
-				jsCleanSelect(objSelect);
 				for(var num in data){
 					jsAddItemToSelect(objSelect, data[num].name+' '+data[num].edition, data[num].id)
 				}
@@ -245,16 +234,11 @@ var book;
 		var Item = new Option(objItemText,objItemValue);
 		objSelect.options.add(Item); 
 	} 
-	
-	function jsCleanSelect(objSelect){
-		objSelect.innerHTML = "";
-	}
-
 	 
 	//lesson下拉框响应
 	$("#search_result_lesson").change(function(){
 		var obj = document.getElementById('search_result_lesson');
-		var index = obj.selectedIndex;
+		var index = obj.selectedIndex - 1;
 	     //更改3框，显示课程信息
 	     $("#lesson_id").val(lesson[index].code);
 	     $("#lesson_name").val(lesson[index].name);
@@ -265,19 +249,18 @@ var book;
 	
 	//book下拉框响应
 	$("#search_result_book").change(function(){
-		var obj = document.getElementById('search_result_book');
-		var index = obj.selectedIndex;
 	     //更改显示书本信息
-		 $("#name").val(book[index].name);
-		 $("#ISBN").val(book[index].isbn);
-		 $("#edition").val(book[index].edition);
-		 $("#chief_editor").val(book[index].chief_editor);
-		 $("#publisher").val(book[index].publisher);
-		 $("#pub_date").val(book[index].pub_date);
-		 $("#author").val(book[index].author);
-		 $("#price").val(book[index].price);
+		 $("#name").val(book[$("#search_result_book").val()].name);
+		 $("#ISBN").val(book[$("#search_result_book").val()].isbn);
+		 $("#edition").val(book[$("#search_result_book").val()].edition);
+		 $("#chief_editor").val(book[$("#search_result_book").val()].chief_editor);
+		 $("#publisher").val(book[$("#search_result_book").val()].publisher);
+		 $("#pub_date").val(book[$("#search_result_book").val()].pub_date);
+		 $("#author").val(book[$("#search_result_book").val()].author);
+		 $("#price").val(book[$("#search_result_book").val()].price);
 	    });
 	
 </script>
+	
 </body>
 </html>
