@@ -7,6 +7,8 @@
 
 <body>
 <script>
+var lesson;
+var book;
 	<!--课程搜索 -->
 	function foo(){
 		$.ajax({
@@ -15,6 +17,7 @@
 			data:"keyword=" + document.getElementById("search_bar").value,
 			success:function(data){
 				<!-- 添加课程下拉框 -->
+				lesson = data;
 				var objSelect = document.getElementById("search_result_lesson"); 
 				for(var num in data){
 					function jsAddItemToSelect(objSelect, data[num].code+' '+data[num].name, data[num].id)
@@ -30,6 +33,7 @@
 			type:'post',
 			data:"lid=" + document.getElementById("search_result_lesson").value,
 			success:function(data){
+				book = data;
 				<!-- 添加书本下拉框 -->
 				var objSelect = document.getElementById("search_result_book"); 
 				for(var num in data){
@@ -48,6 +52,9 @@
 	//lesson下拉框响应
 	$("#search_result_lesson").change(function(){
 	     //更改3框，显示课程信息
+	     $(".lesson_id").val() = lesson[$("#search_result_lesson").val()].code;
+	     $(".lesson_msg").val() = lesson[$("#search_result_lesson").val()].name;
+	     $(".lesson_time").val() = lesson[$("#search_result_lesson").val()].hours;
 	     //ajax获取书本信息
 	     searchBook();
 	    });
@@ -55,6 +62,14 @@
 	//book下拉框响应
 	$("#search_result_book").change(function(){
 	     //更改显示书本信息
+		 $(".name").val() = book[$("#search_result_book").val()].name;
+		 $(".ISBN").val() = book[$("#search_result_book").val()].isbn;
+		 $(".edition").val() = book[$("#search_result_book").val()].edition;
+		 $(".chief_editor").val() = book[$("#search_result_book").val()].chief_editor;
+		 $(".publisher").val() = book[$("#search_result_book").val()]..publisher;
+		 $(".pub_date").val() = book[$("#search_result_book").val()].pub_date;
+		 $(".author").val() = book[$("#search_result_book").val()].author;
+		 $(".price").val() = book[$("#search_result_book").val()].price;
 	    });
 	
 </script>
@@ -102,15 +117,21 @@
 									</td></tr>
 									<tr>
 										<td>课程编号</td>
-										<td><font style="color: red;">(这里查库后显示课程信息)</font></td>
+										<td><font style="color: red;">
+										<input id = "lesson_id" name = "lesson_id" type = "text">
+										(这里查库后显示课程信息)</font></td>
 									</tr>
 									<tr>
 										<td>课程名称</td>
-										<td><font style="color: red;">(这里查库后显示课程信息)</font></td>
+										<td><font style="color: red;">
+										<input id = "lesson_name" name = "lesson_name" type = "text">
+										(这里查库后显示课程信息)</font></td>
 									</tr>
 									<tr>
-										<td>课程学时</td>
-										<td><font style="color: red;">(这里查库后显示课程信息)</font></td>
+										<td>课程学时</td>	
+										<td><font style="color: red;">									
+										<input id = "lesson_time" name = "lesson_time" type = "text">
+										(这里查库后显示课程信息)</font></td>
 									</tr>
 								</table>
 							</td>
@@ -150,7 +171,7 @@
 									</tr>
 									<tr>
 										<td>出版单位</td>
-										<td><input id="institute" name="institute" type="text"
+										<td><input id="publisher" name="publisher" type="text"
 											class="form-control"></td>
 									</tr>
 									<tr>

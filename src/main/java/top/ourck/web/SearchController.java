@@ -58,6 +58,7 @@ public class SearchController {
 			jobj.put("chief_editor", ub.getBook().getBookDetail().getChiefEditor());
 			jobj.put("publisher", ub.getBook().getBookDetail().getInstitute());
 			jobj.put("pub_date", ub.getBook().getBookDetail().getPubDate());
+				//need a author
 			jobj.put("price", ub.getBook().getBookDetail().getPrice());
 			jary.put(jobj);
 		}
